@@ -16,16 +16,23 @@ import {
 import { Fontisto, Octicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import Loading from "../Components/Loading";
-
+import { useAuth } from "../context/authContext";
 export default function SignIn() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const emailRef = useRef("");
   const passwordRef = useRef("");
+  const { login } = useAuth();
 
   const handlelogin = async () => {
     if (!emailRef.current || !passwordRef.current) {
       Alert.alert(" Sign In", "Please fill all the fields");
+      return;
+    }
+    let response = await login(emailRef.current, passwordRef.current);
+    console.log("got result", response);
+    if (!response.success) {
+      Alert.alert("Sign In", response.massage);
       return;
     }
   };

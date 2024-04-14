@@ -17,11 +17,11 @@ import { Fontisto, Octicons, Feather, FontAwesome5 } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import Loading from "../Components/Loading";
 import CustomKeyboardView from "../Components/CustomKeyboardView";
-// import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/authContext";
 
 export default function SignUp() {
   const router = useRouter();
-  // const { register } = useAuth();
+  const { register } = useAuth();
   const [loading, setLoading] = useState(false);
   const emailRef = useRef("");
   const passwordRef = useRef("");
@@ -29,28 +29,28 @@ export default function SignUp() {
   const profileRef = useRef("");
 
   const handleRegister = async () => {
-    // if (
-    //   !emailRef.current ||
-    //   !passwordRef.current ||
-    //   !usernameRef.current ||
-    //   !profileRef.current
-    // ) {
-    //   Alert.alert("Sign up", "Please fill all the fields");
-    //   return;
-    // }
+    if (
+      !emailRef.current ||
+      !passwordRef.current ||
+      !usernameRef.current ||
+      !profileRef.current
+    ) {
+      Alert.alert("Sign up", "Please fill all the fields");
+      return;
+    }
     // setLoading(true);
-    // let response = await register(
-    //   emailRef.current,
-    //   passwordRef.current,
-    //   usernameRef.current,
-    //   profileRef.current
-    // );
+    let response = await register(
+      emailRef.current,
+      passwordRef.current,
+      usernameRef.current,
+      profileRef.current
+    );
     // setLoading(false);
-    // console.log("got result", response);
-    // if (!response.success) {
-    //   Alert.alert("Sign up", response.massage);
-    //   return;
-    // }
+    console.log("got result", response);
+    if (!response.success) {
+      Alert.alert("Sign up", response.massage);
+      return;
+    }
   };
   return (
     <View style={styles.container}>

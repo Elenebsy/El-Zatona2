@@ -4,24 +4,27 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { auth } from "../firebase/Config";
 import { doc, setDoc, getDoc } from "firebase/firestore";
+import { Alert } from "react-native";
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const [isAuthenticated, setIsAuthenticated] = useState(undefined);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
+      console.log("user", user);
       if (user) {
-        setUser(user);
         setIsAuthenticated(true);
+        setUser(user);
       } else {
-        setUser(null);
         setIsAuthenticated(false);
+        setUser(null);
       }
     });
     return unsub;
@@ -29,11 +32,34 @@ export const AuthContextProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-    } catch (error) {}
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      // setUser(res?.user);
+      // setIsAuthenticated(true);
+      return { success: true, data: res?.user };
+    } catch (error) {
+      let message = error.message;
+      if (error.code === "auth/user-not-found") {
+        message = "User not found";
+        Alert.alert("Error", message);
+      } else if (error.code === "auth/wrong-password") {
+        message = "Wrong password";
+        Alert.alert("Error", message);
+      } else if (error.code === "auth/invalid-email") {
+        message = "Invalid email";
+        Alert.alert("Error", message);
+      } else if (error.code === "auth/too-many-requests") {
+        message = "Too many requests";
+        Alert.alert("Error", message);
+      }
+    }
   };
-  const logout = () => {
+  const logout = async () => {
     try {
-    } catch (error) {}
+      await signOut(auth);
+      return { success: true };
+    } catch (error) {
+      return { success: false, message: error.message, error: error };
+    }
   };
 
   const register = async (email, password, username, profileUrl) => {
@@ -49,7 +75,19 @@ export const AuthContextProvider = ({ children }) => {
       });
       return { success: true, data: res?.user };
     } catch (error) {
-      return { success: false, massage: error.massage };
+      let message = error.message;
+      if (error.code === "auth/email-already-in-use") {
+        message = "Email already in use";
+        Alert.alert("Error", message);
+      } else if (error.code === "auth/invalid-email") {
+        message = "Invalid email";
+        Alert.alert("Error", message);
+      } else if (error.code === "auth/weak-password") {
+        message = "Weak password";
+        Alert.alert("Error", message);
+      }
+
+      return { success: false, message };
     }
   };
 
