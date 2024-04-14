@@ -9,6 +9,7 @@ import {
 import { auth } from "../firebase/Config";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { Alert } from "react-native";
+import { db } from "../firebase/Config";
 
 export const AuthContext = createContext();
 
@@ -18,10 +19,11 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
-      console.log("user", user);
+      // console.log("user", user);
       if (user) {
         setIsAuthenticated(true);
         setUser(user);
+        updateUserData(user.uid);
       } else {
         setIsAuthenticated(false);
         setUser(null);
@@ -30,6 +32,19 @@ export const AuthContextProvider = ({ children }) => {
     return unsub;
   }, []);
 
+  const updateUserData = async (userId) => {
+    const docRef = doc(db, "users", userId);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      let userData = docSnap.data();
+      setUser({
+        ...user,
+        username: userData.username,
+        profileUrl: userData.profileUrl,
+      });
+    }
+  };
   const login = async (email, password) => {
     try {
       const res = await signInWithEmailAndPassword(auth, email, password);
