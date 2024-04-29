@@ -1,11 +1,41 @@
-import React from "react";
-import { Text, View, StyleSheet, ActivityIndicator } from "react-native";
+import { onAuthStateChanged } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { ActivityIndicator, View, Text, StyleSheet } from "react-native";
+import { auth } from "../firebase/Config";
+import { Link, router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import Loading from "../Components/Loading";
 
-export default function welcome() {
+export default function Page() {
+  useEffect(() => {
+    // console.log("auth().currentUser", auth.currentUser);
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("user1", user);
+        AsyncStorage.setItem("user", JSON.stringify(user));
+        router.replace("/");
+      } else {
+        console.log("user2", user);
+        AsyncStorage.removeItem("user");
+        router.replace("/course");
+      }
+      // setUser(user)
+    });
+
+    return () => {
+      unsub();
+    };
+  }, []);
+
   return (
     <View style={styles.container}>
-      <ActivityIndicator size="large" color="gray" />
+      <Loading />
+      <Link href={"/course"}>Not loading? Login here</Link>
+      {/* {user ? <App /> : <Register />} */}
+      <StatusBar style="auto" />
     </View>
+    // <Cities />
   );
 }
 
