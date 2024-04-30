@@ -5,9 +5,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-} from "firebase/auth";
+} from "@firebase/auth";
 import { auth } from "../firebase/Config";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "@firebase/firestore";
 import { Alert } from "react-native";
 import { db } from "../firebase/Config";
 
