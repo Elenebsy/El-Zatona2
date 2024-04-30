@@ -1,4 +1,4 @@
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged } from "@firebase/auth";
 import { useEffect, useState } from "react";
 import { ActivityIndicator, View, Text, StyleSheet } from "react-native";
 import { auth } from "../firebase/Config";
@@ -30,7 +30,7 @@ export default function Page() {
 
   return (
     <View style={styles.container}>
-      <Loading />
+      <ActivityIndicator />
       <Link href={"/course"}>Not loading? Login here</Link>
       {/* {user ? <App /> : <Register />} */}
       <StatusBar style="auto" />
