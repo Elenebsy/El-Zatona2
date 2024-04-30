@@ -9,11 +9,18 @@ import {
 import CustomKeyboardView from '../../Components/CustomKeyboardView';
 import CustomMenuItems from '../../Components/CustomMenuItems';
 import { Platform } from 'react-native';
+import { login } from '../../firebase/auth';
 
 
 
 const Welcome = () => {
   const router = useRouter();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const handleLogin = async() => {
+    await login(email, password);
+    router.push('/');
+  }
 
 
   return (
@@ -27,7 +34,8 @@ const Welcome = () => {
       <TextInput
         placeholder='Email'
         style={styles.input}
-        
+        value={email}
+        onChangeText={setEmail}
         
         autoCapitalize="none"
         keyboardType="email-address"
@@ -35,6 +43,8 @@ const Welcome = () => {
       <TextInput
         placeholder='Password'
         style={styles.input}
+        value={password}
+        onChangeText={setPassword}
         
         
         secureTextEntry
@@ -43,7 +53,7 @@ const Welcome = () => {
 
       
 
-      <Pressable style={styles.button}>
+      <Pressable style={styles.button} onPress={handleLogin}>
         <Text style={styles.buttonText}>Log In</Text>
       </Pressable>
 

@@ -6,9 +6,16 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { forgetPassword } from '../../firebase/auth';
 
 const Welcome = () => {
   const router = useRouter();
+  const [email, setEmail] = useState('');
+  const handleForgetpassword = async() => {
+    await forgetPassword(email);
+    Alert.alert("Password Reset", "Password reset email has been sent");
+    router.push('/account');
+  }
   
  
   return (
@@ -20,17 +27,19 @@ const Welcome = () => {
 
       <TextInput 
         placeholder='Email' 
-        style={styles.input} 
+        style={styles.input}
+        value={email}
+        onChangeText={setEmail} 
       
     
         keyboardType="email-address" 
         autoCapitalize="none"
       />
-      <Pressable style={styles.button} >
+      <Pressable style={styles.button} onPress={handleForgetpassword}>
         <Text style={styles.buttonText}>Submit</Text>
       </Pressable>
       <Pressable style={styles.link} onPress={() => router.push('/account')}>
-        <Text style={styles.linkText}>Back to Sign Up</Text>
+        <Text style={styles.linkText}>Back to Sign In</Text>
       </Pressable>
     </View>
     </ScrollView>

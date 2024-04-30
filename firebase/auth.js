@@ -6,7 +6,8 @@ import {
   sendPasswordResetEmail,
   confirmPasswordReset,
   signInWithCredential,
-  FacebookAuthProvider,
+  FacebookAuthProvider
+  
 } from "@firebase/auth";
 import { db } from "./Config";
 import { collection } from "@firebase/firestore";
@@ -40,5 +41,8 @@ await setDoc(docRef, {
 async function login(email, password) {
   await signInWithEmailAndPassword(auth, email, password);
 }
+async function forgetPassword(email) {
+  await sendPasswordResetEmail(auth, email);
+}
 
-export { register, login };
+export { register, login , forgetPassword};
