@@ -5,9 +5,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-} from "firebase/auth";
+} from "@firebase/auth";
 import { auth } from "../firebase/Config";
-import { doc, setDoc, getDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "@firebase/firestore";
 import { Alert } from "react-native";
 import { db } from "../firebase/Config";
 
@@ -15,7 +15,7 @@ export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [isAuthenticated, setIsAuthenticated] = useState(undefined);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (user) => {
@@ -85,7 +85,7 @@ export const AuthContextProvider = ({ children }) => {
       setIsAuthenticated(true);
       await setDoc(doc(db, "users", res?.user?.uid), {
         username,
-        profileUrl,
+        password,
         userId: res?.user?.uid,
       });
       return { success: true, data: res?.user };

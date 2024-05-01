@@ -4,12 +4,12 @@ import LottieView from "lottie-react-native";
 
 export default function Loading(size) {
   return (
-    <View style={{ height: size, aspectRatio: 1 }}>
+    <View style={{ ...styles.container, height: size, aspectRatio: 1 }}>
       <LottieView
         source={require("../assets/loading.json")}
         autoPlay
         loop
-        speed={1.5}
+        speed={2}
         resizeMode="contain"
 
         autoSize
@@ -24,8 +24,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+
   },
   lottie: {
+
     width: 200,
     height: 200,
   },
