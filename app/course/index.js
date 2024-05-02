@@ -7,7 +7,7 @@ export default function Course() {
   return (
     <View style={styles.container}>
       <Text>Course</Text>
-      <Pressable onPress={() => router.push("/account")}>
+      <Pressable onPress={() => router.push("/account/Welcome")}>
         <Text>List</Text>
         </Pressable>
     </View>

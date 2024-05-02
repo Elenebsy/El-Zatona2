@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TextInput, Pressable ,Image,ScrollView} from 'react-native';
+import { StyleSheet, View, Text, TextInput, Pressable ,Image,ScrollView, Alert} from 'react-native';
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
 import logo from '../../assets/logo.png';
@@ -10,6 +10,8 @@ import CustomKeyboardView from '../../Components/CustomKeyboardView';
 import CustomMenuItems from '../../Components/CustomMenuItems';
 import { Platform } from 'react-native';
 import { login } from '../../firebase/auth';
+import { FontAwesome6,Fontisto  } from '@expo/vector-icons';
+import { signInWithGoogle } from '../../firebase/auth';
 
 
 
@@ -20,6 +22,15 @@ const Welcome = () => {
   const handleLogin = async() => {
     await login(email, password);
     router.push('/');
+  }
+  const handleGoogle = async() => {
+try {
+  await signInWithGoogle();
+  router.push('/');
+} catch (error) {
+  console.error(error);
+  Alert.alert("failed", error.message);
+}
   }
 
 
@@ -50,6 +61,9 @@ const Welcome = () => {
         secureTextEntry
         autoCapitalize="none"
       />
+      <Pressable style={styles.link} onPress={() => router.push('/account/ForgetPassword')}>
+        <Text style={styles.linkText}>Forget Password?</Text>
+      </Pressable>
 
       
 
@@ -57,16 +71,20 @@ const Welcome = () => {
         <Text style={styles.buttonText}>Log In</Text>
       </Pressable>
 
-      <Pressable style={styles.link} onPress={() => router.push('/account/ForgetPassword')}>
-        <Text style={styles.linkText}>Forget Password?</Text>
-      </Pressable>
+      
 
-      <Pressable style={styles.link} onPress={() => router.push('/account/SignUp')}>
+      <Pressable style={styles.tt} onPress={() => router.push('/account/SignUp')}>
         <Text style={styles.linkText}>SignUp</Text>
       </Pressable>
+      <Text style={{color:'gray',fontWeight:'bold',fontSize:15,textAlign:"center"}}>or</Text>
+      <Text style={{color:'gray',fontWeight:'bold',fontSize:15,textAlign:"center",marginTop:-25}}>___________________________________________</Text>
+    <View style={{ flexDirection:"row",justifyContent:"space-between",marginTop:5}}>
+     <Pressable style={{marginRight:20}} onPress={handleGoogle}><Fontisto name="google" size={24} color="red" /></Pressable>  
+    <Pressable><FontAwesome6 name="facebook" size={24} color="blue" /></Pressable>
+    </View>
     </View>
     </ScrollView>
-    
+      
   );
 }
 
@@ -114,11 +132,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   link: {
-    marginTop: 15,
+
+  alignSelf:"flex-start",
+
   },
   linkText: {
     color: "blue",
     textDecorationLine: 'underline',
+    
   },
   error: {
     color: 'red',
@@ -133,7 +154,11 @@ const styles = StyleSheet.create({
     justifyContent:"flex-start",
   top:hp(5)
   
+  },
+  tt:{
+    marginBottom:15,
   }
+
 });
 
 export default Welcome;

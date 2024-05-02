@@ -11,8 +11,10 @@
   "dependencies": {
     "@lottiefiles/react-lottie-player": "^3.5.3",
     "@react-native-async-storage/async-storage": "1.21.0",
+    "@react-native-google-signin/google-signin": "^11.0.1",
     "@react-navigation/drawer": "^6.6.15",
     "expo": "~50.0.17",
+    "expo-auth-session": "~5.4.0",
     "expo-constants": "~15.4.6",
     "expo-dev-client": "^3.3.11",
     "expo-image": "~1.10.6",
