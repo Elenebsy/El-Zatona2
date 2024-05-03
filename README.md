@@ -1,19 +1,23 @@
 # Al-Zatona2
 
 
-Home
-Signin -> 3zat x
-Signup -> 3zat x
+welcome -> 3zat             x
+Signin -> 3zat               x
+Signup -> 3zat               x
 Forgot your password -> 3zat x
-NavBar
-Settings
-Search
-Notifications
+
+NavBar -> for all page only
+Settings -> 3mr
+Search -> el3nbsy
+
 Profile -> kamal
-Help/Support
-admin
-welcome -> 3zat x
-Announcements ->
-review
+review -> 3zat
+Help/Support -> 3zat
+
+Home   -> mostafa
+
 products -> el3nbsy
-cards -> el3nbsy
+carts -> el3nbsy
+Notifications -> mostafa
+Announcements ->mostafa
+admin -> kamal
