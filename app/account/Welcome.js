@@ -17,7 +17,10 @@ const Welcome = ({navigation} ) => {
       <Image source={Education} style={styles.Education}/>
       <Text style={styles.title}>El_Zatona <Text style={styles.span}>Education</Text> For The Future</Text>
       <Text style={styles.text}>It is long established fact that reader distracted by the readable content</Text>
-      <Pressable style={styles.button} onPress={() => router.push('/account')}  >
+      <Pressable style={styles.button} onPress={() => router.push('/account/')}  >
+        <Text style={styles.buttonText}>Get Started</Text>
+      </Pressable>
+      <Pressable style={styles.button} onPress={() => router.push('/account/review')}  >
         <Text style={styles.buttonText}>Get Started</Text>
       </Pressable>
       

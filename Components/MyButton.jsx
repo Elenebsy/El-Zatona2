@@ -14,7 +14,7 @@ export default function MyButton({ onPress, style, children, color }) {
         style || {}
       ]}
     >
-      <Text>{children}</Text>
+      {children}
     </Pressable>
   );
 };
