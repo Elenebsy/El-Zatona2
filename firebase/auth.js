@@ -8,6 +8,7 @@ import {
   signInWithCredential,
   FacebookAuthProvider,
 } from "@firebase/auth";
+
 import { db } from "./Config";
 import { collection } from "@firebase/firestore";
 import {setDoc, doc, getDoc} from "@firebase/firestore"
