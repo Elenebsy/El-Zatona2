@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, TextInput, Pressable ,Image,ScrollView, Alert} from 'react-native';
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/supermarketlogo.png';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,

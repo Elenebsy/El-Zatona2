@@ -1,74 +1,74 @@
-import { StyleSheet ,View,Text,Image,useWindowDimensions,Pressable ,ScrollView} from 'react-native'
-import React from 'react'
-import Education from '../../assets/logo.png'
-import { Link , router, useRouter} from 'expo-router';
-import {
-  widthPercentageToDP as wp,
-  heightPercentageToDP as hp,
-} from "react-native-responsive-screen";
+import React from 'react';
+import { StyleSheet, View, Text, Image, ScrollView, Pressable } from 'react-native';
+import { widthPercentageToDP as wp, heightPercentageToDP as hp } from "react-native-responsive-screen";
+import { useRouter,Link } from 'expo-router';
 
-const Welcome = ({navigation} ) => {
-  const {height} = useWindowDimensions();
-  const router = useRouter();
- 
+// Import local assets
+import supermarketLogo from '../../assets/supermarketlogo.png'; // Assume you have a logo
+
+const WelcomePage = () => {
+ const router = useRouter();
+ const handleGetStarted = () => {
+   router.push('/account');
+ }
+
   return (
-    <ScrollView>
-    <View style={styles.container}>
-      <Image source={Education} style={styles.Education}/>
-      <Text style={styles.title}>El_Zatona <Text style={styles.span}>Market</Text> For Everything</Text>
-      <Text style={styles.text}>It is long established fact that reader distracted by the readable content</Text>
-      <Pressable style={styles.button} onPress={() => router.push('/account/')}  >
+    <ScrollView contentContainerStyle={styles.container}>
+      <Image source={supermarketLogo} style={styles.logo} />
+      <Text style={styles.title}>Welcome to El Zatona Market</Text>
+      <Text style={styles.subtitle}>Find everything you need, from groceries to home essentials!</Text>
+
+      <Pressable style={styles.button}  onPress={handleGetStarted}>
         <Text style={styles.buttonText}>Get Started</Text>
       </Pressable>
-      <Pressable style={styles.button} onPress={() => router.push('/account/helpandsupportpage')}  >
+      <Pressable style={styles.button}  onPress={() => router.replace('/account/helpandsupportpage')}>
         <Text style={styles.buttonText}>Get Started</Text>
       </Pressable>
-     
-      
-    
-    </View>
+
+   
     </ScrollView>
   );
-} 
-const styles = StyleSheet.create({
-container : {
-  flex:1,
-  alignItems:'center',
-  backgroundColor:"white",
-},
-Education : {
-  width:wp(100),
-    height:hp(50),
-    resizeMode:"contain",
-    justifyContent:"flex-start",
-  top:hp(5)
+};
 
-},
-title : {
-  fontWeight : "bold",
-  fontSize : 50  ,
-  color : "#1e1f26",
-  marginBottom:10 ,
-},
-span : {
-  color : "green"
-},
-text : {
-  fontSize : 20  ,
-  color : "#3A3967"
-},
-button: {
-  backgroundColor: 'green',
-  width: "60%",
-  alignItems: "center",
-  height: 40,
-  justifyContent: "center",
-  marginTop: 15,
-  borderRadius: 5,
-},
-buttonText: {
-  color: "white",
-  fontSize: 16,
-},
+const styles = StyleSheet.create({
+  container: {
+    flexGrow: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: wp(5),
+    backgroundColor: 'white',
+  },
+  logo: {
+    width: wp(100),
+    height: hp(30),
+    resizeMode: 'contain',
+    marginBottom: hp(5),
+  },
+  title: {
+    fontSize: wp(8),
+    fontWeight: 'bold',
+    color: 'green', // Brand primary color
+    marginBottom: hp(2),
+  },
+  subtitle: {
+    fontSize: wp(4.5),
+    color: '#264653', // Secondary color
+    textAlign: 'center',
+    marginBottom: hp(4),
+  },
+  button: {
+    backgroundColor: 'green',
+    width: "60%",
+    alignItems: "center",
+    height: 40,
+    justifyContent: "center",
+    marginTop: 15,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+  },
 });
-export default Welcome 
+
+export default WelcomePage;
