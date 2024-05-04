@@ -107,13 +107,10 @@ export default function Course() {
 
   return (
     <View style={styles.container}>
-      {/* <FlatList
-        style={{ width: "100%" }}
-        data={course}
-        renderItem={({ item }) => <CourseItem item={item} />}
-      ></FlatList> */}
-
-      <MyButton onPress={handleUpLoadFile}>MyButton</MyButton>
+      <Text>Course</Text>
+      <Pressable onPress={() => router.push("/account/Welcome")}>
+        <Text>List</Text>
+        </Pressable>
     </View>
   );
 }
