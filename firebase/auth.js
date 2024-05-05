@@ -6,12 +6,11 @@ import {
   sendPasswordResetEmail,
   confirmPasswordReset,
   signInWithCredential,
-  FacebookAuthProvider
-  
+  FacebookAuthProvider,
 } from "@firebase/auth";
 import { db } from "./Config";
 import { collection } from "@firebase/firestore";
-import {setDoc, doc, getDoc} from "@firebase/firestore"
+import { setDoc, doc, getDoc } from "@firebase/firestore";
 // Listen for authentication state to change.
 onAuthStateChanged(auth, (user) => {
   if (user != null) {
@@ -25,16 +24,14 @@ async function register(email, password, name, phone, code) {
   const cred = await createUserWithEmailAndPassword(auth, email, password);
   const usercol = collection(db, "users");
   const docRef = doc(usercol, cred.user.uid);
-await setDoc(docRef, {
-  email: email,
-  name: name,
-  phone: phone,
-  code: code,
-  password: password
+  await setDoc(docRef, {
+    email: email,
+    name: name,
+    phone: phone,
+    code: code,
+    password: password,
+  });
 
-})
-
-  
   return cred;
 }
 
@@ -45,4 +42,4 @@ async function forgetPassword(email) {
   await sendPasswordResetEmail(auth, email);
 }
 
-export { register, login , forgetPassword};
+export { register, login, forgetPassword };
