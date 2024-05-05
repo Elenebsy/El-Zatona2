@@ -30,9 +30,5 @@ export const auth = initializeAuth(app, {
 export const authentication = getAuth(app);
 
 export const db = getFirestore(app);
-export const storage = getStorage(app);
+export const storage = getStorage(app, "gs://el-zatona-6013a.appspot.com");
 export const database = getDatabase(app);
-
-export const usersRef = collection(db, "users");
-
-export const roomsRef = collection(db, "rooms");

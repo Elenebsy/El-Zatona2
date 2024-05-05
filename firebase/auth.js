@@ -7,17 +7,24 @@ import {
   confirmPasswordReset,
   signInWithCredential,
   FacebookAuthProvider,
+<<<<<<< HEAD
   GoogleAuthProvider,
   signInWithPopup
   
+=======
+>>>>>>> El3nbsy
 } from "@firebase/auth";
 
 import { db } from "./Config";
 import { collection } from "@firebase/firestore";
+<<<<<<< HEAD
 import {setDoc, doc, getDoc} from "@firebase/firestore";
 const provider = new GoogleAuthProvider();
 
 
+=======
+import { setDoc, doc, getDoc } from "@firebase/firestore";
+>>>>>>> El3nbsy
 // Listen for authentication state to change.
 onAuthStateChanged(auth, (user) => {
   if (user != null) {
@@ -31,16 +38,14 @@ async function register(email, password, name, phone, code) {
   const cred = await createUserWithEmailAndPassword(auth, email, password);
   const usercol = collection(db, "users");
   const docRef = doc(usercol, cred.user.uid);
-await setDoc(docRef, {
-  email: email,
-  name: name,
-  phone: phone,
-  code: code,
-  password: password
+  await setDoc(docRef, {
+    email: email,
+    name: name,
+    phone: phone,
+    code: code,
+    password: password,
+  });
 
-})
-
-  
   return cred;
 }
 
@@ -72,5 +77,9 @@ async function signInWithGoogle() {
   });
 }
 
+<<<<<<< HEAD
 
 export { register, login , forgetPassword, signInWithGoogle};
+=======
+export { register, login, forgetPassword };
+>>>>>>> El3nbsy

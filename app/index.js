@@ -14,11 +14,15 @@ export default function Page() {
       if (user) {
         console.log("user1", user);
         AsyncStorage.setItem("user", JSON.stringify(user));
+<<<<<<< HEAD
         router.replace("/profile/profile");
+=======
+        router.replace("/products");
+>>>>>>> El3nbsy
       } else {
         console.log("user2", user);
         AsyncStorage.removeItem("user");
-        router.replace("/course");
+        router.replace("/products");
       }
       // setUser(user)
     });
