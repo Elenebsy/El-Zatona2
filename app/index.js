@@ -14,7 +14,7 @@ export default function Page() {
       if (user) {
         console.log("user1", user);
         AsyncStorage.setItem("user", JSON.stringify(user));
-        router.replace("/");
+        router.replace("/profile/profile");
       } else {
         console.log("user2", user);
         AsyncStorage.removeItem("user");

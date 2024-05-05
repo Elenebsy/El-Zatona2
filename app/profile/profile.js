@@ -1,53 +1,84 @@
-import React from "react";
-import { View, Text, Image, Pressable, StyleSheet } from "react-native";
+import React,{useEffect, useState} from "react";
+import { View,ScrollView, Text, Image, Pressable, StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Photo from "../../assets/users.png";
 import { useRouter } from "expo-router";
 import { FontAwesome5 } from "@expo/vector-icons";
+import {getUserById} from "../../firebase/review";
+import { MaterialIcons } from '@expo/vector-icons';
+
+
+
+
+
+
 
 const UserProfile = () => {
+  const [user, setUser] = useState({});
+  const router = useRouter();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userData = await getUserById();
+        if (!userData) {
+          console.error("User data not found, cannot post comment.");
+          return;
+        }
+        console.log("userData1", userData);
+        setUser(userData);
+      } catch (error) {
+        console.log("Error fetching user data:", error);
+      }
+    };
+
+    fetchData(); // Call the asynchronous function inside useEffect
+
+    // Add dependencies if needed
+  }, []); // Empty dependency array means it will only run once after the initial render
+
+
+
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        {/* <Pressable onPress={() => console.log('Back button pressed')}>
+        <Pressable onPress={() => router.push('/course')}>
           <AntDesign name="arrowleft" size={24} color="white" />
-        </Pressable> */}
-        <Text style={styles.userName}>user name</Text>
+        </Pressable>
+        <Text style={styles.userName}>{user.name || "user name"}</Text>
       </View>
 
       {/* Avatar */}
       <View style={styles.avatarContainer}>
         <Pressable onPress={() => console.log("avatar pressed")}>
-          <Image source={Photo} style={styles.avatar} />
+          <Image source={Photo} style={ user.avatar || styles.avatar} />
         </Pressable>
       </View>
 
       {/* User Information */}
       <View style={styles.box}>
         <View style={styles.infoBox}>
-          <AntDesign name="calendar" size={24} color="blue" />
-          <Text style={styles.infoText}>       Birthday </Text>
+          <AntDesign name="calendar" size={24} color="blue" value={user.birthday || "N/A"} />
+          <Text style={styles.infoText}  >       {user.birthday || "birthday"} </Text>
         </View>
         <View style={styles.infoBox}>
           <AntDesign name="phone" size={24} color="blue" />
-          <Text style={styles.infoText}>       Phone number </Text>
+          <Text style={styles.infoText}>       {user.phone || "222-222-222"} </Text>
         </View>
         <View style={styles.infoBox}>
           <FontAwesome5 name="map-marked-alt" size={24} color="blue" />
-          <Text style={styles.infoText}>       address </Text>
+          <Text style={styles.infoText}>      {user.address || "N/A"} </Text>
         </View>
         <View style={styles.infoBox}>
           <Text style={styles.infoText}>
             <AntDesign name="mail" size={24} color="blue" />
-            <Text style={styles.infoLabel}> </Text> info@example.com
-          </Text>
+            <Text style={styles.infoLabel}> </Text>      {user.email || "user@"} </Text>
         </View>
         <View style={styles.infoBox}>
-          <AntDesign name="eyeo" size={24} color="blue" />
+          <MaterialIcons name="admin-panel-settings" size={24} color="blue" />
           <Text style={styles.infoText}>
-            <Text style={styles.infoLabel}> </Text> password
-          </Text>
+            <Text style={styles.infoLabel}> </Text>      {user.admin || "You are normal user"}</Text>
         </View>
       </View>
 
@@ -55,14 +86,20 @@ const UserProfile = () => {
       <View style={styles.box}>
         <Pressable
           style={styles.editButton}
-          onPress={() => console.log("Edit profile button pressed")}
+          onPress={() => router.push('/profile/Settings')}
         >
           <Text style={styles.buttonText}>Edit Profile</Text>
         </Pressable>
       </View>
-    </View>
+    </ScrollView>
   );
 };
+const InfoBox = ({ icon, label, value }) => (
+  <View style={styles.infoBox}>
+      <FontAwesome5 name={icon} size={24} color="green" />
+      <Text style={styles.infoText}>{label}: {value}</Text>
+  </View>
+);
 
 const styles = StyleSheet.create({
   container: {
@@ -115,7 +152,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   infoText: {
-    fontSize: 16,
+    fontSize: 18,
     color: "black", // Black text color
   },
   infoLabel: {
