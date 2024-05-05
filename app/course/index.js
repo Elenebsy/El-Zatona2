@@ -111,6 +111,9 @@ export default function Course() {
       <Pressable onPress={() => router.push("/account/Welcome")}>
         <Text>List</Text>
         </Pressable>
+      <Pressable onPress={() => router.push("/profile/profile")}>
+        <Text>profile</Text>
+        </Pressable>
     </View>
   );
 }

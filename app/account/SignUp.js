@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text, TextInput, Pressable, useWindowDimensions ,Image,ScrollView,Alert} from 'react-native';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/supermarketlogo.png';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -112,8 +112,8 @@ const styles = StyleSheet.create({
     color: "blue",
   },
   image: {
-   width: wp(40),
-   height: hp(40),
+   width: wp(80),
+   height: hp(30),
    
     
 
