@@ -7,24 +7,17 @@ import {
   confirmPasswordReset,
   signInWithCredential,
   FacebookAuthProvider,
-<<<<<<< HEAD
   GoogleAuthProvider,
   signInWithPopup
   
-=======
->>>>>>> El3nbsy
 } from "@firebase/auth";
 
 import { db } from "./Config";
 import { collection } from "@firebase/firestore";
-<<<<<<< HEAD
 import {setDoc, doc, getDoc} from "@firebase/firestore";
 const provider = new GoogleAuthProvider();
 
 
-=======
-import { setDoc, doc, getDoc } from "@firebase/firestore";
->>>>>>> El3nbsy
 // Listen for authentication state to change.
 onAuthStateChanged(auth, (user) => {
   if (user != null) {
@@ -77,9 +70,4 @@ async function signInWithGoogle() {
   });
 }
 
-<<<<<<< HEAD
-
-export { register, login , forgetPassword, signInWithGoogle};
-=======
 export { register, login, forgetPassword };
->>>>>>> El3nbsy

@@ -21,7 +21,7 @@ const Welcome = () => {
   const [password, setPassword] = useState('');
   const handleLogin = async() => {
     await login(email, password);
-    router.push('/profile/profile');
+    router.push('/products');
   }
   const handleGoogle = async() => {
 try {

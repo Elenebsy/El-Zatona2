@@ -67,7 +67,7 @@ export default function Products() {
         </SafeAreaView>
       </CustomKeyboardView>
       <CustomKeyboardView style={styles.top1}>
-        <MyButton color="blue" onPress={() => handleGetProducts()}>
+        <MyButton  color="blue"  onPress={() => handleGetProducts()}>
           {({ pressed }) => (
             <Text style={styles.text}>
               {pressed ? "Refreshing" : "Refresh"}
@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
     margin: 5,
     padding: 15,
     width: "100%",
+    display: "flex",
   },
   top1: {
     flex: 0.1,
@@ -105,6 +106,7 @@ const styles = StyleSheet.create({
     padding: 15,
     // backgroundColor: "yellow",
     width: "100%",
+    // marginRight: 15,
   },
   input: {
     flex: 1,
@@ -114,6 +116,7 @@ const styles = StyleSheet.create({
   list: {
     flex: 0.9,
     margin: 5,
+    marginRight: 15,
     // padding: 15,
     // backgroundColor: "yellow",
     width: "100%",
