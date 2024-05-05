@@ -10,9 +10,6 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 
 
-
-
-
 const UserProfile = () => {
   const [user, setUser] = useState({});
   const router = useRouter();
@@ -44,39 +41,39 @@ const UserProfile = () => {
       {/* Header */}
       <View style={styles.header}>
         <Pressable onPress={() => router.push('/course')}>
-          <AntDesign name="arrowleft" size={24} color="white" />
+          <AntDesign name="arrowleft" size={30} color="white" />
         </Pressable>
-        <Text style={styles.userName}>{user.name || "user name"}</Text>
+        <Text style={styles.userName}>                  {user.name || "user name"}</Text>
       </View>
 
       {/* Avatar */}
       <View style={styles.avatarContainer}>
         <Pressable onPress={() => console.log("avatar pressed")}>
-          <Image source={Photo} style={ user.avatar || styles.avatar} />
+          <Image source={ user.avatar || Photo} style={ styles.avatar} />
         </Pressable>
       </View>
 
       {/* User Information */}
       <View style={styles.box}>
         <View style={styles.infoBox}>
-          <AntDesign name="calendar" size={24} color="blue" value={user.birthday || "N/A"} />
+          <AntDesign name="calendar" size={30} color="blue" value={user.birthday || "N/A"} />
           <Text style={styles.infoText}  >       {user.birthday || "birthday"} </Text>
         </View>
         <View style={styles.infoBox}>
-          <AntDesign name="phone" size={24} color="blue" />
+          <AntDesign name="phone" size={30} color="blue" />
           <Text style={styles.infoText}>       {user.phone || "222-222-222"} </Text>
         </View>
         <View style={styles.infoBox}>
-          <FontAwesome5 name="map-marked-alt" size={24} color="blue" />
+          <FontAwesome5 name="map-marked-alt" size={30} color="blue" />
           <Text style={styles.infoText}>      {user.address || "N/A"} </Text>
         </View>
         <View style={styles.infoBox}>
           <Text style={styles.infoText}>
-            <AntDesign name="mail" size={24} color="blue" />
+            <AntDesign name="mail" size={30} color="blue" />
             <Text style={styles.infoLabel}> </Text>      {user.email || "user@"} </Text>
         </View>
         <View style={styles.infoBox}>
-          <MaterialIcons name="admin-panel-settings" size={24} color="blue" />
+          <MaterialIcons name="admin-panel-settings" size={30} color="blue" />
           <Text style={styles.infoText}>
             <Text style={styles.infoLabel}> </Text>      {user.admin || "You are normal user"}</Text>
         </View>
@@ -119,24 +116,26 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
   header: {
-    // flexDirection: 'row',
-    // alignItems: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 12,
     padding: 12,
-    backgroundColor: "green",
+    backgroundColor: "blue",
     borderRadius: 22,
+    textAlign: "center",
+    alignContent: 'center',
   },
   userName: {
-    color: "black",
-    fontSize: 20,
+    color: "white",
+    fontSize: 23,
     fontWeight: "bold",
     // marginLeft: 85,
     textAlign: "center",
     // alignContent: 'center',
   },
   avatar: {
-    width: 200,
-    height: 200,
+    width: 300,
+    height: 300,
     borderRadius: 8,
     // marginLeft: 50,
   },
@@ -152,7 +151,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
   },
   infoText: {
-    fontSize: 18,
+    fontSize: 22,
     color: "black", // Black text color
   },
   infoLabel: {
@@ -168,7 +167,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 23,
     fontWeight: "bold",
   },
 });
