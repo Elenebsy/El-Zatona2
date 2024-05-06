@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, TextInput, Pressable, Alert,Image ,ScrollView} from 'react-native';
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/forgetpassword.png';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -96,8 +96,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   image: {
-    width:wp(70),
-    height:hp(40),
+    width:wp(60),
+    height:hp(30),
 
    
    
