@@ -57,11 +57,11 @@ const Welcome = () => {
         <Text style={styles.buttonText}>Log In</Text>
       </Pressable>
 
-      <Pressable style={styles.link} onPress={() => router.push('/account/ForgetPassword')}>
+      <Pressable style={styles.link} onPress={() => router.push('/(account)/ForgetPassword')}>
         <Text style={styles.linkText}>Forget Password?</Text>
       </Pressable>
 
-      <Pressable style={styles.link} onPress={() => router.push('/account/SignUp')}>
+      <Pressable style={styles.link} onPress={() => router.push('/(account)/SignUp')}>
         <Text style={styles.linkText}>SignUp</Text>
       </Pressable>
     </View>
