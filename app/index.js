@@ -16,7 +16,7 @@ export default function Page() {
         } catch (error) {
           console.error('Error storing user data:', error);
         }
-        router.push('/(products)/Home');
+        router.push('/(products)/');
       } else {
         console.log("user2", user);
         try {

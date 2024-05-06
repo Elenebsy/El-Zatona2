@@ -1,11 +1,10 @@
 import React from "react";
-import { StyleSheet, Text, View ,Pressable} from "react-native";
-import { useRouter } from "expo-router";
+import { StyleSheet, View, Text } from "react-native";
 
-export default function Course() {
-  const router = useRouter();
+export default function Cart() {
   return (
     <View style={styles.container}>
+      <Text>Cart</Text>
     </View>
   );
 }

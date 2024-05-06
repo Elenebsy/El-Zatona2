@@ -5,7 +5,7 @@ export default function Layout () {
     return (    
         <Stack>
             <Stack.Screen 
-            name="Home" options={{
+            name="index" options={{
                         header: () => <CustomHeader /> 
                         }}
                      /> 
