@@ -1,10 +1,11 @@
-import { StyleSheet, View, Text, TextInput, Pressable, useWindowDimensions ,Image,ScrollView} from 'react-native';
-import logo from '../../assets/logo.png';
+import { StyleSheet, View, Text, TextInput, Pressable, useWindowDimensions ,Image,ScrollView,Alert} from 'react-native';
+import logo from '../../assets/supermarketlogo.png';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { register } from '../../firebase/auth';
+import { FontAwesome6,Fontisto  } from '@expo/vector-icons';
 
 
 import React, { useState } from 'react';
@@ -17,12 +18,16 @@ const Welcome = () => {
  const [email, setEmail] = useState('');
  const [phone, setPhone] = useState('');
  const [password, setPassword] = useState('');
- const handleSignUp = async() => {
-   await register(email, password, name, phone, code);
-   router.push('/');
+ const handleSignUp = async () => {
+  try {
+    await register(email, password, name, phone, code);
    
-  
- }
+    router.push('/');
+  } catch (error) {
+    console.error(error);
+    Alert.alert("failed", error.message);
+  }
+}
  
 
   return (
@@ -37,18 +42,24 @@ const Welcome = () => {
       <TextInput placeholder='Phone' style={styles.input}  value={phone} onChangeText={setPhone} />  
       <TextInput placeholder='Password' style={styles.input}  value={password} onChangeText={setPassword}  secureTextEntry/>
 
-     
+      <Pressable style={styles.tt} onPress={() => router.push('/account/ForgetPassword')}>
+        <Text style={{ color: "blue" }}>Forget Password?</Text>
+      </Pressable>
 
       <Pressable style={styles.link} onPress={handleSignUp}  >
         <Text style={styles.linkText}>Sign Up</Text>
       </Pressable>
-      <Pressable style={styles.tt} onPress={() => router.replace('/account')}>
+      <Pressable style={styles.cc} onPress={() => router.replace('/account')}>
         <Text  style={{ color: "blue" }}>Back To SignIn</Text>
       </Pressable>
+      <Text style={{color:'gray',fontWeight:'bold',fontSize:15,textAlign:"center"}}>or</Text>
+      <Text style={{color:'gray',fontWeight:'bold',fontSize:15,textAlign:"center",marginTop:-25}}>___________________________________________</Text>
+    <View style={{ flexDirection:"row",justifyContent:"space-between",marginTop:5}}>
+    <Pressable style={{marginRight:20}} ><Fontisto name="google" size={24} color="red" /></Pressable>  
+    <Pressable><FontAwesome6 name="facebook" size={24} color="blue" /></Pressable>
+    </View>
 
-      <Pressable style={styles.tt} onPress={() => router.push('/account/ForgetPassword')}>
-        <Text style={{ color: "blue" }}>Forget Password?</Text>
-      </Pressable>
+    
     </View>
     </ScrollView>
   );
@@ -69,7 +80,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: '#F2F2F2',
-    width: "85%",
+    width: "100%",
     height: 40,
     marginVertical: 10,
     paddingHorizontal: 10,
@@ -101,12 +112,15 @@ const styles = StyleSheet.create({
     color: "blue",
   },
   image: {
-   width: wp(40),
-   height: hp(40),
+   width: wp(80),
+   height: hp(30),
    
     
 
 
+  },
+  tt: {
+    alignSelf: "flex-start",
   }
 });
 
