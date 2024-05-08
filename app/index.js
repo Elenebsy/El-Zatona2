@@ -6,21 +6,26 @@ import { Link, router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Loading from "../Components/Loading";
-
 export default function Page() {
   useEffect(() => {
-    // console.log("auth().currentUser", auth.currentUser);
-    const unsub = onAuthStateChanged(auth, (user) => {
+    const unsub = onAuthStateChanged(auth, async (user) => {
       if (user) {
         console.log("user1", user);
-        AsyncStorage.setItem("user", JSON.stringify(user));
-        router.replace("/products");
+        try {
+          await AsyncStorage.setItem("user", JSON.stringify(user));
+        } catch (error) {
+          console.error('Error storing user data:', error);
+        }
+        router.push('/(products)/');
       } else {
         console.log("user2", user);
-        AsyncStorage.removeItem("user");
-        router.replace("/account");
+        try {
+          await AsyncStorage.removeItem("user");
+        } catch (error) {
+          console.error('Error removing user data:', error);
+        }
+        router.replace("/(account)/login");
       }
-      // setUser(user)
     });
 
     return () => {
@@ -28,15 +33,17 @@ export default function Page() {
     };
   }, []);
 
+  
   return (
-    <View style={styles.container}>
-      <ActivityIndicator />
-      <Link href={"/course"}>Not loading? Login here</Link>
-      {/* {user ? <App /> : <Register />} */}
-      <StatusBar style="auto" />
-    </View>
-    // <Cities />
+
+     <View style={styles.container}>
+      
+      </View>
+
   );
+   
+   
+  
 }
 
 const styles = StyleSheet.create({
@@ -47,3 +54,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+

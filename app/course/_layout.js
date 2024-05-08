@@ -9,7 +9,7 @@ export default function Layout() {
         name="index"
         options={{
           headerShown: false,
-          title: "Course",
+          title: "Home",
           stackPresentation: "modal",
           stackAnimation: "slide_from_right",
           tabBarIcon: () => (

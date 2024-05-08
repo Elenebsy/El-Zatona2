@@ -14,10 +14,8 @@ import {
 
 import { db } from "./Config";
 import { collection } from "@firebase/firestore";
-import {setDoc, doc, getDoc} from "@firebase/firestore";
-const provider = new GoogleAuthProvider();
-
-
+import {setDoc, doc, getDoc } from "@firebase/firestore"
+import { getUserById } from "./review";
 // Listen for authentication state to change.
 onAuthStateChanged(auth, (user) => {
   if (user != null) {
@@ -26,8 +24,14 @@ onAuthStateChanged(auth, (user) => {
 
   // Do other things
 });
-
+async function updateuser(user){
+  // const currentUser = await getUserById();
+  const usercol = collection(db, "users");
+  const docRef = doc(usercol, auth.currentUser.uid);
+  await updateDoc(docRef, user);
+}
 async function register(email, password, name, phone, code) {
+  
   const cred = await createUserWithEmailAndPassword(auth, email, password);
   const usercol = collection(db, "users");
   const docRef = doc(usercol, cred.user.uid);
