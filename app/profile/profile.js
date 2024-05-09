@@ -40,7 +40,7 @@ const UserProfile = () => {
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Pressable onPress={() => router.push('/course')}>
+        <Pressable onPress={() => router.push('/(products)')}>
           <AntDesign name="arrowleft" size={30} color="white" />
         </Pressable>
         <Text style={styles.userName}>                  {user.name || "user name"}</Text>

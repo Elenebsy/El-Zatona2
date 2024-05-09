@@ -24,7 +24,7 @@ export default function Page() {
         } catch (error) {
           console.error("Error removing user data:", error);
         }
-        router.push("/(account)/login");
+        router.push("/(account)/Welcome");
       }
     });
 
