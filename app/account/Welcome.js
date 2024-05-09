@@ -21,9 +21,7 @@ const WelcomePage = () => {
       <Pressable style={styles.button}  onPress={handleGetStarted}>
         <Text style={styles.buttonText}>Get Started</Text>
       </Pressable>
-      <Pressable style={styles.button}  onPress={() => router.replace('/account/helpandsupportpage')}>
-        <Text style={styles.buttonText}>Get Started</Text>
-      </Pressable>
+      
 
    
     </ScrollView>
@@ -63,7 +61,7 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: "center",
     marginTop: 15,
-    borderRadius: 5,
+    borderRadius: 25,
   },
   buttonText: {
     color: "white",

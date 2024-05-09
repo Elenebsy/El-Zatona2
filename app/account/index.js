@@ -18,10 +18,16 @@ import { signInWithGoogle } from '../../firebase/auth';
 const Welcome = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState(''); 
   const handleLogin = async() => {
+  try {
     await login(email, password);
     router.push('/account/review');
+  } catch (error) {
+    console.error(error);
+    Alert.alert("failed", error.message);
+    console.log("check your email and password");
+  }
   }
   const handleGoogle = async() => {
 try {
@@ -36,7 +42,7 @@ try {
 
   return (
 
-   <ScrollView>
+  <ScrollView>
     <View style={styles.container}>
       <Image source={logo} style={styles.image} />
       <Text style={styles.title}>SignIn</Text>
@@ -76,12 +82,7 @@ try {
       <Pressable style={styles.tt} onPress={() => router.push('/account/SignUp')}>
         <Text style={styles.linkText}>SignUp</Text>
       </Pressable>
-      <Text style={{color:'gray',fontWeight:'bold',fontSize:15,textAlign:"center"}}>or</Text>
-      <Text style={{color:'gray',fontWeight:'bold',fontSize:15,textAlign:"center",marginTop:-25}}>___________________________________________</Text>
-    <View style={{ flexDirection:"row",justifyContent:"space-between",marginTop:5}}>
-     <Pressable style={{marginRight:20}} onPress={handleGoogle}><Fontisto name="google" size={24} color="red" /></Pressable>  
-    <Pressable><FontAwesome6 name="facebook" size={24} color="blue" /></Pressable>
-    </View>
+ 
     </View>
     </ScrollView>
       
