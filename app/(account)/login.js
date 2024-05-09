@@ -26,7 +26,7 @@ const Welcome = () => {
   const handleLogin = async () => {
     try {
       await login(email, password);
-      router.push("/account/review");
+      router.push("/(products)/");
     } catch (error) {
       console.error(error);
       Alert.alert("failed", error.message);
