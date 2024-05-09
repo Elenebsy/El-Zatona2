@@ -31,5 +31,14 @@ async function getProducts() {
     getProducts();
   }
 }
+async function getProductById(id) {
+  const productsCol = collection(db, "products");
+  const docRef = doc(productsCol, id);
+  const docSnap = await getDoc(docRef);
 
-export { getProducts };
+  if (docSnap.exists()) {
+    return docSnap.data();
+  }
+}
+
+export { getProducts, getProductById };

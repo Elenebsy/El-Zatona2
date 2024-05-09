@@ -14,12 +14,15 @@ import MyButton from "../../Components/MyButton";
 import ProductItem from "../../Components/productItem";
 import CustomKeyboardView from "../../Components/CustomKeyboardView";
 import { getProducts } from "../../firebase/products";
+import { useRouter } from "expo-router";
 
 export default function Products() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [text, setText] = useState("");
   const [DATA, setDATA] = useState([]);
+
+  const router = useRouter();
 
   const searchItems = (searchFor) => {
     console.log("searchFor", searchFor);
@@ -48,7 +51,7 @@ export default function Products() {
   ) : (
     <SafeAreaView style={styles.top}>
       <CustomKeyboardView style={styles.top1}>
-        <SafeAreaView style={styles.sideBySide}>
+        {/* <SafeAreaView style={styles.sideBySide}>
           <TextInput
             style={styles.input}
             placeholder="Search for"
@@ -64,10 +67,10 @@ export default function Products() {
               </Text>
             )}
           </MyButton>
-        </SafeAreaView>
+        </SafeAreaView> */}
       </CustomKeyboardView>
       <CustomKeyboardView style={styles.top1}>
-        <MyButton  color="blue"  onPress={() => handleGetProducts()}>
+        <MyButton color="blue" onPress={() => handleGetProducts()}>
           {({ pressed }) => (
             <Text style={styles.text}>
               {pressed ? "Refreshing" : "Refresh"}
@@ -82,8 +85,8 @@ export default function Products() {
         renderItem={({ item: product }) => (
           <ProductItem
             product={product}
-            // onPress={() => router.navigate(`/product/${product.id}`)}
-            // onConfirm={() => AddToCart(product.id)}
+            onPress={() => router.push(`/(products)/${product.id}`)}
+            onConfirm={() => AddToCart(product.id)}
             // onDelete={() => deleteFromCart(product.id)}
           />
         )}

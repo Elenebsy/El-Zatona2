@@ -2,30 +2,32 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { initializeAuth ,getAuth} from "@firebase/auth";
+import { initializeAuth, getAuth } from "@firebase/auth";
 import { getReactNativePersistence } from "@firebase/auth/dist/rn/index.js";
 import { AsyncStorage } from "@react-native-async-storage/async-storage";
 import { getFirestore, collection } from "@firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getDatabase } from "@firebase/database";
-import {  API_KEY,
+import {
+  API_KEY,
   AUTH_DOMAIN,
   DATABASE_URL,
   PROJECT_ID,
   STORAGE_BUCKET,
- MESSAGING_SENDER_ID,
-  APP_ID,} from '@env';
+  MESSAGING_SENDER_ID,
+  APP_ID,
+} from "@env";
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: API_KEY,
-  authDomain: AUTH_DOMAIN,
-  databaseURL: DATABASE_URL,
-  projectId: PROJECT_ID,
-  storageBucket: STORAGE_BUCKET,
-  messagingSenderId: MESSAGING_SENDER_ID,
-  appId: APP_ID,
+  apiKey: "AIzaSyD4y_HcrmvVOMXd7wb_ci56QJCbBha212Y",
+  authDomain: "el-zatona-6013a.firebaseapp.com",
+  databaseURL:
+    "https://el-zatona-6013a-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "el-zatona-6013a",
+  storageBucket: "el-zatona-6013a.appspot.com",
+  messagingSenderId: "13856631772",
+  appId: "1:13856631772:web:8750bab4ccee2704643d19",
 };
-
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
