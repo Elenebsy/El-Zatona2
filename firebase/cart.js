@@ -13,7 +13,24 @@ import {
 } from "@firebase/firestore";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Products from "./products.json";
+import { getProductById } from "./products";
 
-async function getCart() {}
+async function getCarts() {
+  const cartsCol = collection(db, "carts");
+  const querySnapshot = await getDocs(cartsCol);
+  const cartsList = querySnapshot.docs.map((doc) => {
+    return { id: doc.id, ...doc.data() };
+  });
+  return cartsList;
+}
 
-export default getCart;
+async function setCart(cart) {
+  const cartsCol = collection(db, "carts");
+  await setDoc(doc(cartsCol), cart);
+}
+
+async function addToCart(id) {
+  const product = await getProductById(id);
+}
+
+export default { getCarts, setCart };
