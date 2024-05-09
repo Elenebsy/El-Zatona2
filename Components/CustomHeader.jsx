@@ -2,7 +2,7 @@ import { View , Text , StyleSheet, TouchableOpacity,Image , TextInput } from "re
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { React } from "react";
 import { Ionicons } from '@expo/vector-icons';
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 const SearchBar = () => (
 <View style={styles.SearchContainer}>
     <View style={styles.SearchBar}>
@@ -19,6 +19,7 @@ const SearchBar = () => (
     </View>
 )
 const CustomHeader = () => {
+    const router = useRouter();
     return (
        <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>
@@ -36,7 +37,7 @@ const CustomHeader = () => {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.profile}>
-        <Ionicons name="person-outline" size={24} color="green" />
+        <Ionicons name="person-outline" size={24} color="green" onPress={() => router.replace('/profile/profile')} />
         </TouchableOpacity>
         </View>
         <SearchBar />
