@@ -14,7 +14,7 @@ import {
 
 import { db } from "./Config";
 import { collection } from "@firebase/firestore";
-import {setDoc, doc, getDoc } from "@firebase/firestore"
+import {setDoc, doc, getDoc ,updateDoc } from "@firebase/firestore"
 import { getUserById } from "./review";
 // Listen for authentication state to change.
 onAuthStateChanged(auth, (user) => {
@@ -74,4 +74,4 @@ async function signInWithGoogle() {
   });
 }
 
-export { register, login, forgetPassword };
+export { register, login, forgetPassword ,updateuser};
