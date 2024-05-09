@@ -129,8 +129,10 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 23,
     fontWeight: "bold",
+    width: "80%",
     // marginLeft: 85,
     textAlign: "center",
+    
     // alignContent: 'center',
   },
   avatar: {
