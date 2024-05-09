@@ -52,12 +52,7 @@ const Welcome = () => {
       <Pressable style={styles.cc} onPress={() => router.replace('/account')}>
         <Text  style={{ color: "blue" }}>Back To SignIn</Text>
       </Pressable>
-      <Text style={{color:'gray',fontWeight:'bold',fontSize:15,textAlign:"center"}}>or</Text>
-      <Text style={{color:'gray',fontWeight:'bold',fontSize:15,textAlign:"center",marginTop:-25}}>___________________________________________</Text>
-    <View style={{ flexDirection:"row",justifyContent:"space-between",marginTop:5}}>
-    <Pressable style={{marginRight:20}} ><Fontisto name="google" size={24} color="red" /></Pressable>  
-    <Pressable><FontAwesome6 name="facebook" size={24} color="blue" /></Pressable>
-    </View>
+  
 
     
     </View>

@@ -12,9 +12,14 @@ const Welcome = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const handleForgetpassword = async() => {
-    await forgetPassword(email);
-    Alert.alert("Password Reset", "Password reset email has been sent");
-    router.push('/account');
+    try{
+      await forgetPassword(email);
+      router.push('/account');
+    }catch(error){
+      console.error(error);
+      Alert.alert("failed", error.message);
+      console.log("check your email ");
+    }
   }
   
  
@@ -99,8 +104,7 @@ const styles = StyleSheet.create({
     width:wp(60),
     height:hp(30),
 
-   
-   
+
   }
 });
 
