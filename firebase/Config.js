@@ -21,12 +21,11 @@ import {
 const firebaseConfig = {
   apiKey: "AIzaSyD4y_HcrmvVOMXd7wb_ci56QJCbBha212Y",
   authDomain: "el-zatona-6013a.firebaseapp.com",
-  databaseURL:
-    "https://el-zatona-6013a-default-rtdb.europe-west1.firebasedatabase.app/",
+  databaseURL: "https://el-zatona-6013a-default-rtdb.europe-west1.firebasedatabase.app/",
   projectId: "el-zatona-6013a",
   storageBucket: "el-zatona-6013a.appspot.com",
   messagingSenderId: "13856631772",
-  appId: "1:13856631772:web:8750bab4ccee2704643d19",
+  appId: "1:13856631772:web:8750bab4ccee2704643d19"
 };
 
 // Initialize Firebase

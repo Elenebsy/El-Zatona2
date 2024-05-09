@@ -8,7 +8,8 @@ import {
   signInWithCredential,
   FacebookAuthProvider,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
+  signOut,
   
 } from "@firebase/auth";
 
@@ -30,6 +31,11 @@ async function updateuser(user){
   const docRef = doc(usercol, auth.currentUser.uid);
   await updateDoc(docRef, user);
 }
+
+async function logout() {
+  await signOut(auth);
+}
+
 async function register(email, password, name, phone, code) {
   
   const cred = await createUserWithEmailAndPassword(auth, email, password);
@@ -74,4 +80,4 @@ async function signInWithGoogle() {
   });
 }
 
-export { register, login, forgetPassword };
+export { register, login , logout , forgetPassword };

@@ -103,8 +103,7 @@ const styles = StyleSheet.create({
     width:wp(60),
     height:hp(30),
 
-   
-   
+
   }
 });
 
