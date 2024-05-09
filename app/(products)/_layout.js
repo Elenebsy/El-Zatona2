@@ -6,7 +6,7 @@ export default function Layout () {
         <Stack>
             <Stack.Screen 
             name="index" options={{
-                        header: () => <CustomHeader /> 
+                        header: () => <CustomHeader  /> 
                         }}
                      /> 
 

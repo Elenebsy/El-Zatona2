@@ -26,6 +26,7 @@ export default function Products() {
     setData(
       data.filter((user) =>
         user.name.toLowerCase().includes(searchFor.toLowerCase())
+      
       )
     );
   };
@@ -46,10 +47,10 @@ export default function Products() {
   return isLoading ? (
     <ActivityIndicator />
   ) : (
-    <SafeAreaView style={styles.top}>
-      <CustomKeyboardView style={styles.top1}>
-        <SafeAreaView style={styles.sideBySide}>
-          <TextInput
+    <SafeAreaView style={styles.top} >
+      <CustomKeyboardView style={styles.top1}  >
+        <SafeAreaView style={styles.sideBySide} >
+          <TextInput 
             style={styles.input}
             placeholder="Search for"
             onChangeText={(t) => {
