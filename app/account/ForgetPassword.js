@@ -14,14 +14,15 @@ const Welcome = () => {
   const handleForgetpassword = async() => {
     try{
       await forgetPassword(email);
-      router.push('/(account)/login');
+      router.push('/account');
     }catch(error){
+      console.error(error);
       Alert.alert("failed", error.message);
       console.log("check your email ");
     }
   }
   
- 
+
   return (
     <ScrollView>
     <View style={styles.container}>
@@ -42,7 +43,7 @@ const Welcome = () => {
       <Pressable style={styles.button} onPress={handleForgetpassword}>
         <Text style={styles.buttonText}>Submit</Text>
       </Pressable>
-      <Pressable style={styles.link} onPress={() => router.push('/(account)/login')}>
+      <Pressable style={styles.link} onPress={() => router.push('/account')}>
         <Text style={styles.linkText}>Back to Sign In</Text>
       </Pressable>
     </View>
@@ -103,7 +104,8 @@ const styles = StyleSheet.create({
     width:wp(60),
     height:hp(30),
 
-
+   
+   
   }
 });
 
