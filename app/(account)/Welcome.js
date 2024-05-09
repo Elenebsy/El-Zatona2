@@ -19,7 +19,7 @@ import supermarketLogo from "../../assets/supermarketlogo.png"; // Assume you ha
 const WelcomePage = () => {
   const router = useRouter();
   const handleGetStarted = () => {
-    router.push("/account");
+    router.push("/(account)/login");
   };
 
   return (
