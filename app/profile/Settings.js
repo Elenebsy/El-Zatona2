@@ -1,119 +1,94 @@
-import React,{useEffect, useState} from "react";
-import { View,ScrollView, Text, Image, Pressable, StyleSheet, TextInput} from "react-native";
-import { AntDesign } from "@expo/vector-icons";
-import Photo from "../../assets/users.png";
-import { useRouter } from "expo-router";
-import { FontAwesome5 } from "@expo/vector-icons";
-import {getUserById} from "../../firebase/review";
-import { MaterialIcons } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, Pressable, Image } from 'react-native';
+import { AntDesign, FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { getUserById } from '../../firebase/review';
 
-
-
-
-const UserProfile = () => {
+const EditProfilePage = () => {
   const [user, setUser] = useState({});
-  const router = useRouter();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [birthday, setBirthday] = useState('');
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const userData = await getUserById();
         if (!userData) {
-          console.error("User data not found, cannot post comment.");
+          console.error("User data not found, cannot edit profile.");
           return;
         }
-        console.log("userData1", userData);
         setUser(userData);
+        setName(userData.name || '');
+        setEmail(userData.email || '');
+        setBirthday(userData.birthday || '');
       } catch (error) {
-        console.log("Error fetching user data:", error);
+        console.error("Error fetching user data:", error);
       }
     };
 
-    fetchData(); // Call the asynchronous function inside useEffect
+    fetchData();
+  }, []);
 
-    // Add dependencies if needed
-  }, []); // Empty dependency array means it will only run once after the initial render
-
-
-
+  const handleSaveProfile = async () => {
+    
+    try {
+      
+      console.log('Saving profile:', { name, email, birthday });
+      
+    } catch (error) {
+      console.error('Error saving profile:', error);
+    }
+  };
 
   return (
-    <ScrollView style={styles.container}>
-      {/* Header */}
+    <View style={styles.container}>
       <View style={styles.header}>
         <Pressable onPress={() => router.push('/course')}>
           <AntDesign name="arrowleft" size={30} color="white" />
         </Pressable>
-        <Text style={styles.userName}>                  {user.name || "user name"}</Text>
+        <Text style={styles.userName}>{user.name || "User Name"}</Text>
       </View>
 
-      {/* Avatar */}
       <View style={styles.avatarContainer}>
-        <Pressable onPress={() => console.log("avatar pressed")}>
-          <Image source={ user.avatar || Photo} style={ styles.avatar} />
+        <Pressable onPress={() => console.log("Avatar pressed")}>
+          <Image source={user.avatar || require('../../assets/users.png')} style={styles.avatar} />
         </Pressable>
       </View>
 
-      {/* User Information */}
       <View style={styles.box}>
-        <View style={styles.infoBox}>
-          <AntDesign name="calendar" size={30} color="blue" value={user.birthday || "N/A"} />
-          <Text style={styles.infoText}  >       {user.birthday || "birthday"} </Text>
-        </View>
-        <View style={styles.infoBox}>
-          <AntDesign name="phone" size={30} color="blue" />
-          <TextInput style={styles.infoText} placeholder=" Enter phone number"></TextInput>
-        </View>
-        <View style={styles.infoBox}>
-          <FontAwesome5 name="map-marked-alt" size={30} color="blue" />
-          <Text style={styles.infoText}>      {user.address || "N/A"} </Text>
-        </View>
-        <View style={styles.infoBox}>
-          <Text style={styles.infoText}>
-            <AntDesign name="mail" size={30} color="blue" />
-            <Text style={styles.infoLabel}> </Text>      {user.email || "user@"} </Text>
-        </View>
-        <View style={styles.infoBox}>
-          <MaterialIcons name="admin-panel-settings" size={30} color="blue" />
-          <Text style={styles.infoText}>
-            <Text style={styles.infoLabel}> </Text>      {user.admin || "You are normal user"}</Text>
-        </View>
+        <InfoBox icon="calendar" label="Birthday" value={birthday} onChangeText={setBirthday} />
+        <InfoBox icon="phone" label="Phone" value={user.phone || "222-222-222"} onChangeText={setPhone} />
+        <InfoBox icon="map-marked-alt" label="Address" value={user.address || "N/A"} onChangeText={setAddress} />
+        <InfoBox icon="mail" label="Email" value={email || "user@"} onChangeText={setEmail} />
+        <InfoBox icon="admin-panel-settings" label="Admin" value={user.admin || "You are a normal user"} onChangeText={setAdmin} />
       </View>
 
-      {/* Edit Profile Button */}
       <View style={styles.box}>
-        <Pressable
-          style={styles.editButton}
-          onPress={() => router.push('/profile/Settings')}
-        >
-          <Text style={styles.buttonText}>Edit Profile</Text>
+        <Pressable style={styles.editButton} onPress={handleSaveProfile}>
+          <Text style={styles.buttonText}>Save Profile</Text>
         </Pressable>
       </View>
-    </ScrollView>
+    </View>
   );
 };
-const InfoBox = ({ icon, label, value }) => (
+
+const InfoBox = ({ icon, label, value, onChangeText }) => (
   <View style={styles.infoBox}>
-      <FontAwesome5 name={icon} size={24} color="green" />
-      <Text style={styles.infoText}>{label}: {value}</Text>
+    <FontAwesome5 name={icon} size={30} color="blue" />
+    <TextInput
+      style={styles.infoText}
+      placeholder={label}
+      value={value}
+      onChangeText={onChangeText}
+    />
   </View>
 );
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5", // Light gray background
+    backgroundColor: "#F5F5F5",
     padding: 16,
-    display: "flex",
-  },
-  box: {
-    backgroundColor: "white",
-    borderRadius: 8,
-    marginBottom: 16,
-    elevation: 3, // Add elevation for shadow (Android)
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
   },
   header: {
     flexDirection: 'row',
@@ -129,21 +104,27 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 23,
     fontWeight: "bold",
-    // marginLeft: 85,
     textAlign: "center",
-    // alignContent: 'center',
   },
   avatar: {
     width: 300,
     height: 300,
     borderRadius: 8,
-    // marginLeft: 50,
   },
   avatarContainer: {
     alignItems: "center",
   },
+  box: {
+    backgroundColor: "white",
+    borderRadius: 8,
+    marginBottom: 16,
+    elevation: 3,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
   infoBox: {
-    // marginBottom: 8,
     padding: 16,
     flexDirection: "row",
     borderBottomColor: "lightgray",
@@ -152,11 +133,8 @@ const styles = StyleSheet.create({
   },
   infoText: {
     fontSize: 22,
-    color: "black", // Black text color
-  },
-  infoLabel: {
-    fontWeight: "bold",
-    color: "purple", // Purple label color
+    color: "black",
+    marginLeft: 10,
   },
   editButton: {
     backgroundColor: "blue",
@@ -172,4 +150,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default UserProfile;
+export default EditProfilePage;
