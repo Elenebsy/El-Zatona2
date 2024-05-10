@@ -1,25 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 import MyButton from "./MyButton";
 
 export default function ItemCart({ product, onPress, onDelete }) {
+  const [quantity, setQuantity] = useState(1);
+
+  const handleIncrement = () => {
+    if (quantity < product.max) {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
         { opacity: pressed ? 0.2 : 1 },
         styles.item,
-      ]}>
+      ]}
+    >
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{ uri: product.images[0] }} />
       </View>
       <View style={styles.main}>
         <Text style={styles.title}>{product.name}</Text>
         <Text style={styles.mutual}>{`${product.price} EGP`}</Text>
+        <View style={styles.counterContainer}>
+          <Pressable onPress={handleDecrement}>
+            <MaterialIcons name="remove" size={24} color="black" />
+          </Pressable>
+          <Text style={styles.counter}>{quantity}</Text>
+          <Pressable onPress={handleIncrement}>
+            <MaterialIcons name="add" size={24} color="black" />
+          </Pressable>
+        </View>
         <MyButton style={styles.button2} onPress={onDelete}>
           <Text style={{ color: "white" }}>Delete</Text>
         </MyButton>
-      </View>    </Pressable>
+      </View>
+    </Pressable>
   );
 }
 
@@ -27,24 +53,17 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     justifyContent: "center"
-    // backgroundColor: "yellow"
   },
   item: {
-    // backgroundColor: "#f9c2ff",
     padding: 5,
     marginVertical: 1,
-    // marginHorizontal: 16,
     flexDirection: "row",
-    // justifyContent: "space-between",
     height: 108,
   },
   title: {
-    // flex: 1,
     fontSize: 16,
-    // textAlign: "right",
   },
   mutual: {
-    // flex: 1,
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "right",
@@ -64,16 +83,17 @@ const styles = StyleSheet.create({
   sideBySide: {
     flexDirection: "row",
   },
-  button1: {
-    flex: 1,
-    marginHorizontal: 2,
-    backgroundColor: "rgb(27,116,228)",
-    borderRadius: 6,
-  },
   button2: {
-    // flex:1,
     marginHorizontal: 2,
     backgroundColor: "red",
     borderRadius: 6,
+  },
+  counterContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  counter: {
+    marginHorizontal: 10,
+    fontSize: 20,
   }
 });

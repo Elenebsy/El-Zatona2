@@ -12,6 +12,15 @@ import { router, useFocusEffect } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ItemCart from "../../Components/ItemCart";
 import MyButton from "../../Components/MyButton";
+import { db, auth } from "../../firebase/Config"; // import your firebase config file
+import {
+  Firestore,
+  collection,
+  doc,
+  getDoc,
+  setDoc,
+  addDoc,
+} from "@firebase/firestore";
 
 export default function Cart() {
   const [isLoading, setLoading] = useState(false);
@@ -54,18 +63,39 @@ export default function Cart() {
     await AsyncStorage.setItem("Cart", JSON.stringify(newCart));
   };
 
+  const checkout = async () => {
+    try {
+      // Upload cart data to Firebase
+      const orderscol = collection(db, "orders");
+
+      const cartJson = JSON.parse((await AsyncStorage.getItem("Cart")) || {});
+      console.log("cartJson", cartJson);
+      const orderdoc = doc(orderscol);
+
+      await setDoc(orderdoc, { ...cartJson, uid: auth.currentUser.uid });
+
+      // Clear cart from AsyncStorage
+      await AsyncStorage.removeItem("Cart");
+      setData([]);
+      setDATA([]);
+    } catch (error) {
+      console.error("Error during checkout:", error);
+      alert("Error during checkout. Please try again.");
+    }
+  };
+
   useFocusEffect(
     useCallback(() => {
       getData();
     }, [])
   );
+
   return isLoading ? (
     <ActivityIndicator />
   ) : (
     <View style={styles.top}>
       <View style={styles.top1}>
-        {/* <Text>{text}</Text> */}
-        {/* <View style={styles.sideBySide}>
+        <View style={styles.sideBySide}>
           <TextInput
             style={styles.input}
             placeholder="Search for"
@@ -74,7 +104,6 @@ export default function Cart() {
               searchItems(t);
             }}
           />
-          
           <MyButton color="red" onPress={() => searchItems(text)}>
             {({ pressed }) => (
               <Text style={styles.text}>
@@ -82,12 +111,11 @@ export default function Cart() {
               </Text>
             )}
           </MyButton>
-        </View> */}
+        </View>
       </View>
       <FlatList
         style={styles.list}
         data={data}
-        // keyExtractor={(item) => item.id}
         renderItem={({ item: product }) => (
           <ItemCart
             product={product}
@@ -96,6 +124,9 @@ export default function Cart() {
           />
         )}
       />
+      <MyButton color="green" onPress={checkout}>
+        <Text style={styles.text}>Checkout</Text>
+      </MyButton>
     </View>
   );
 }
@@ -110,7 +141,6 @@ const styles = StyleSheet.create({
     flex: 0.1,
     margin: 5,
     padding: 15,
-    // backgroundColor: "yellow",
     width: "100%",
   },
   input: {
@@ -121,19 +151,14 @@ const styles = StyleSheet.create({
   list: {
     flex: 0.9,
     margin: 5,
-    // padding: 15,
-    // backgroundColor: "yellow",
     width: "100%",
   },
   sideBySide: {
     flex: 1,
     flexDirection: "row",
-    // backgroundColor: "white",
-    // justifyContent: "center",
-    // alignContent:"center",
-    // alignItems: "center",
     justifyContent: "space-between",
-    // flexWrap: "wrap"
   },
-  text: { color: "white" },
+  text: {
+    color: "white",
+  },
 });
