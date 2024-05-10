@@ -1,12 +1,33 @@
 import { View , Text , StyleSheet, TouchableOpacity , TextInput  } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { React, useState } from "react";
+import  React, {useState , useEffect } from "react";
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from "expo-router";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { useRouter } from "expo-router";
 
+import { getUserById } from '../firebase/review';
 const CustomHeader = () => {
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const userData = await getUserById();
+            if (!userData) {
+              console.error("User data not found, cannot post comment.");
+              return;
+            }
+            console.log("userData1", userData);
+            setUser(userData);
+          } catch (error) {
+            console.log("Error fetching user data:", error);
+          }
+        };
+    
+        fetchData();
+        // Add dependencies if needed
+      }, []);
 
     const router = useRouter();
 
@@ -18,6 +39,9 @@ const CustomHeader = () => {
       const handleProfilePress = () => {
         router.push("/profile/profile");
         };
+const handleWelcomePress = () => {
+    router.push("/(products)");
+    }
 
     return (
 
@@ -28,11 +52,10 @@ const CustomHeader = () => {
           <FontAwesome5 name="shopping-cart" size={24} color="black"  />
          </TouchableOpacity>
 
-                <TouchableOpacity style={styles.top}>
-                    <Text style={styles.title}>Delivering to</Text>
+                <TouchableOpacity style={styles.top} onPress={handleWelcomePress}>
+                    <Text style={styles.title}>Welcome again </Text>
                     <View style={styles.Location}>
-                        <Text style={styles.secondTitle}>Current Location</Text>
-                        <Ionicons name="chevron-down" size={20} color="green" />
+                        <Text style={styles.secondTitle}>{user.name}</Text>
                     </View>
 
                 </TouchableOpacity>
@@ -41,7 +64,6 @@ const CustomHeader = () => {
         <Ionicons name="person-outline" size={24} color="green" onPress={() => router.replace('/profile/profile')} />
         </TouchableOpacity>
         </View>
-      {/*<SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchItems={searchItems} />*/}
        </SafeAreaView>
 
 
@@ -74,12 +96,12 @@ const styles = StyleSheet.create({
            flex:1,
         },
         title:{
-            fontSize:14,
+            fontSize:16,
             color:'#D3D3D3',
          //    gap:20,
         },
         secondTitle:{
-            fontSize:16,
+            fontSize:20,
             fontWeight:'bold',
             color:'#000',
 
