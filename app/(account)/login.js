@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/supermarketlogo.png";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -19,7 +19,6 @@ import CustomKeyboardView from "../../Components/CustomKeyboardView";
 import CustomMenuItems from "../../Components/CustomMenuItems";
 import { Platform } from "react-native";
 import { login } from "../../firebase/auth";
-// import { Alert } from "react-native";
 
 const Welcome = () => {
   const router = useRouter();
@@ -37,9 +36,10 @@ const Welcome = () => {
 
   return (
     <ScrollView>
+      <Text style={{ fontSize: 30, fontWeight: "bold" ,textAlign:"center",color:"green",marginBottom:-20}}>SignIn</Text>
       <View style={styles.container}>
         <Image source={logo} style={styles.image} />
-        <Text style={styles.title}>SignIn</Text>
+        
         <Text style={styles.subtitle}>
           Stay updated on your professional world
         </Text>
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 20,
   },
   link: {
     marginTop: 15,

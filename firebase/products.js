@@ -51,8 +51,6 @@ async function updateProduct(id, product) {
   const productref = doc(productsCol, id);
   await updateDoc(productref, product);
 }
-
-export { getProducts, setProducts, deleteProduct, updateProduct };
 async function getProductById(id) {
   const productsCol = collection(db, "products");
   const docRef = doc(productsCol, id);
@@ -63,4 +61,7 @@ async function getProductById(id) {
   }
 }
 
-export {  getProductById };
+
+export { getProducts, setProducts, deleteProduct, updateProduct, getProductById };
+
+

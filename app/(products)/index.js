@@ -15,7 +15,8 @@ import MyButton from "../../Components/MyButton";
 import ProductItem from "../../Components/productItem";
 import CustomKeyboardView from "../../Components/CustomKeyboardView";
 import { getProducts } from "../../firebase/products";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Link } from "expo-router";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -76,7 +77,7 @@ export default function Products() {
         )
       );
     } else {
-      setData(DATA); // Reset data to the original unfiltered data
+      setData(DATA); 
     }
   };
 
@@ -98,9 +99,12 @@ export default function Products() {
   return isLoading ? (
     <ActivityIndicator />
   ) : (
-    <SafeAreaView style={styles.top}>
-      <CustomKeyboardView style={styles.top1}>
-        {/* <SafeAreaView style={styles.sideBySide}>
+    <SafeAreaView style={styles.container}>
+    
+    <View style={styles.SearchContainer}>
+      <View style={styles.SearchBar}>
+        <View style={styles.SearchBarInput}>
+          <Ionicons style={styles.SearchIcon} name="search" size={24} color="#D3D3D3" onPress={() => searchItems(text)}  />
           <TextInput
             style={styles.input}
             placeholder="Search"
@@ -109,24 +113,16 @@ export default function Products() {
               searchItems(t);
             }}
           />
-          <MyButton color="red" onPress={() => searchItems(text)}>
-            {({ pressed }) => (
-              <Text style={styles.text}>
-                {pressed ? "Searching" : "Search"}
-              </Text>
-            )}
-          </MyButton>
-        </SafeAreaView> */}
-      </CustomKeyboardView>
-      <CustomKeyboardView style={styles.top1}>
-        <MyButton color="blue" onPress={() => handleGetProducts()}>
-          {({ pressed }) => (
-            <Text style={styles.text}>
-              {pressed ? "Refreshing" : "Refresh"}
-            </Text>
-          )}
-        </MyButton>
-      </CustomKeyboardView>
+        </View>
+        <Link href={'/(account)/review'} asChild>
+          <TouchableOpacity style={styles.SearchFilter}>
+          <MaterialIcons name="reviews" size={24} color="black" />
+          </TouchableOpacity>
+        </Link>
+      </View>
+    </View>
+
+      
       <FlatList
         style={styles.list}
         data={data}

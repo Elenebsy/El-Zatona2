@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { View, TextInput, Text, ScrollView, FlatList, StyleSheet, Pressable, Image, ActivityIndicator } from 'react-native';
 import { postComment, getReviews } from '../../firebase/review';
 import user from '../../assets/user.png';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { MaterialIcons } from '@expo/vector-icons';
+import { router } from 'expo-router';
+
 
 const CommentBox = () => {
     const [comment, setComment] = useState('');
@@ -39,7 +43,12 @@ const CommentBox = () => {
 
     return (
         <View style={styles.container}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 10 }}>
             <Text style={styles.header}>Top Reviews from Egypt</Text>
+            <Pressable style={{ marginLeft: 10 ,marginBottom: 20,backgroundColor: 'white', borderRadius: 10,}} onPress={() => router.push('/(account)/helpandsupportpage')}>
+            <MaterialIcons name="contact-support" size={24} color="red" />
+            </Pressable>
+            </View> 
             
             <TextInput
                 style={styles.input}
@@ -55,7 +64,7 @@ const CommentBox = () => {
                 )}
             </Pressable>
             
-            <ScrollView style={styles.scrollView}>
+            <SafeAreaView style={styles.scrollView}>
                 <FlatList
                     data={reviews}
                     keyExtractor={(item, index) => index.toString()}                   
@@ -69,7 +78,7 @@ const CommentBox = () => {
                         </View>
                     )}
                 />
-            </ScrollView>
+            </SafeAreaView>
         </View>
     );
 };

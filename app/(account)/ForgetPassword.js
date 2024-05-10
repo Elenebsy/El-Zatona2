@@ -32,9 +32,10 @@ const Welcome = () => {
 
   return (
     <ScrollView>
+      <Text style={{ fontSize: 30, fontWeight: "bold" ,textAlign:"center",color:"green",marginBottom:-20}}>Forgot Password</Text>
       <View style={styles.container}>
         <Image source={logo} style={styles.image} />
-        <Text style={styles.title}>Forgot Password?</Text>
+        
         <Text style={styles.subtitle}>
           Enter your email below to receive password reset instructions.
         </Text>
@@ -101,7 +102,7 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: "white",
-    fontSize: 18,
+    fontSize: 25,
   },
   link: {
     textDecorationLine: "underline",
