@@ -6,6 +6,7 @@ import {
   Pressable,
   Image,
   ScrollView,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
@@ -18,7 +19,7 @@ import CustomKeyboardView from "../../Components/CustomKeyboardView";
 import CustomMenuItems from "../../Components/CustomMenuItems";
 import { Platform } from "react-native";
 import { login } from "../../firebase/auth";
-import { Alert } from "react-native";
+
 
 const Welcome = () => {
   const router = useRouter();
@@ -27,14 +28,22 @@ const Welcome = () => {
   const handleLogin = async () => {
     try {
       await login(email, password);
-      router.push("/(products)");
+      router.push("/(products)/");
     } catch (error) {
-;
+      // console.error(error);
       Alert.alert("failed", error.message);
       console.log("check your email and password");
     }
   };
- 
+  const handleGoogle = async () => {
+    try {
+      await signInWithGoogle();
+      router.push("/");
+    } catch (error) {
+      // console.error(error);
+      Alert.alert("failed", error.message);
+    }
+  };
 
   return (
     <ScrollView>

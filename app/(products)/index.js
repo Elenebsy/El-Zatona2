@@ -17,12 +17,55 @@ import CustomKeyboardView from "../../Components/CustomKeyboardView";
 import { getProducts } from "../../firebase/products";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { Link } from "expo-router";
+import { useRouter } from "expo-router";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function Products() {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [text, setText] = useState("");
   const [DATA, setDATA] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  const router = useRouter();
+
+  const AddToCart = async (productId) => {
+    const product = data.find(({ id }) => id === productId);
+    if (!product) {
+      Alert.alert("Not Found", "Can't find product");
+      return;
+    }
+    const cartJson = JSON.parse((await AsyncStorage.getItem("Cart")) || "[]");
+    let productInCart = cartJson.find(({ id }) => id === productId);
+    let newCart = [];
+    if (productInCart) {
+      productInCart.qty = (product.qty || 1) + 1;
+      product.inCart = true;
+      newCart = cartJson.filter((u) => u.id !== productId);
+      newCart = [...newCart, productInCart];
+    } else {
+      productInCart = product;
+      productInCart.qty = 1;
+      product.inCart = true;
+      newCart = [...cartJson, productInCart];
+    }
+    // const newProducts = data.filter(u=>u.id!==productId);
+    setCart(newCart);
+
+    await AsyncStorage.setItem("Cart", JSON.stringify(newCart));
+  };
+
+  const deleteFromCart = async (productId) => {
+    const product = cart.find(({ id }) => id === productId);
+    if (!product) {
+      Alert.alert("Not Found", "Can't find product");
+      return;
+    }
+    const newCart = cart.filter((u) => u.id !== productId);
+    setCart(newCart);
+
+    await AsyncStorage.setItem("Cart", JSON.stringify(newCart));
+  };
 
   const searchItems = (searchFor) => {
     console.log("searchFor", searchFor);
@@ -88,9 +131,9 @@ export default function Products() {
         renderItem={({ item: product }) => (
           <ProductItem
             product={product}
-            // onPress={() => router.navigate(`/product/${product.id}`)}
-            // onConfirm={() => AddToCart(product.id)}
-            // onDelete={() => deleteFromCart(product.id)}
+            onPress={() => router.push(`/(products)/${product.id}`)}
+            onConfirm={() => AddToCart(product.id)}
+            onDelete={() => deleteFromCart(product.id)}
           />
         )}
       />

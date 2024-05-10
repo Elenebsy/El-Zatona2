@@ -1,14 +1,18 @@
-import React,{useEffect, useState} from "react";
-import { View,ScrollView, Text, Image, Pressable, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  View,
+  ScrollView,
+  Text,
+  Image,
+  Pressable,
+  StyleSheet,
+} from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import Photo from "../../assets/users.png";
 import { useRouter } from "expo-router";
 import { FontAwesome5 } from "@expo/vector-icons";
-import {getUserById} from "../../firebase/review";
-import { MaterialIcons } from '@expo/vector-icons';
-import {logout} from "../../firebase/auth";
-
-
+import { getUserById } from "../../firebase/review";
+import { MaterialIcons } from "@expo/vector-icons";
 
 const UserProfile = () => {
   const [user, setUser] = useState({});
@@ -36,54 +40,58 @@ const UserProfile = () => {
       }
     };
 
-    fetchData(); // Call the asynchronous function inside useEffect
-
+    fetchData();
     // Add dependencies if needed
   }, []); // Empty dependency array means it will only run once after the initial render
-
-
-
 
   return (
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Pressable onPress={() => router.push('/(products)')}>
+        <Pressable onPress={() => router.push("/course")}>
           <AntDesign name="arrowleft" size={30} color="white" />
         </Pressable>
-        <Text style={styles.userName}>{user.name || "user name"}</Text>
+        <Text style={styles.userName}> {user.name || "user name"}</Text>
       </View>
 
       {/* Avatar */}
       <View style={styles.avatarContainer}>
         <Pressable onPress={() => console.log("avatar pressed")}>
-          <Image source={ user.avatar || Photo} style={ styles.avatar} />
+          <Image source={user.avatar || Photo} style={styles.avatar} />
         </Pressable>
       </View>
 
       {/* User Information */}
       <View style={styles.box}>
         <View style={styles.infoBox}>
-          <AntDesign name="calendar" size={30} color="blue" value={user.birthday || "N/A"} />
-          <Text style={styles.infoText}  >       {user.birthday || "birthday"} </Text>
+          <AntDesign
+            name="calendar"
+            size={30}
+            color="blue"
+            value={user.birthday || "N/A"}
+          />
+          <Text style={styles.infoText}> {user.birthday || "birthday"} </Text>
         </View>
         <View style={styles.infoBox}>
           <AntDesign name="phone" size={30} color="blue" />
-          <Text style={styles.infoText}>       {user.phone || "222-222-222"} </Text>
+          <Text style={styles.infoText}> {user.phone || "222-222-222"} </Text>
         </View>
         <View style={styles.infoBox}>
           <FontAwesome5 name="map-marked-alt" size={30} color="blue" />
-          <Text style={styles.infoText}>      {user.address || "N/A"} </Text>
+          <Text style={styles.infoText}> {user.address || "N/A"} </Text>
         </View>
         <View style={styles.infoBox}>
           <Text style={styles.infoText}>
             <AntDesign name="mail" size={30} color="blue" />
-            <Text style={styles.infoLabel}> </Text>      {user.email || "user@example.com"} </Text>
+            <Text style={styles.infoLabel}> </Text> {user.email || "user@"}{" "}
+          </Text>
         </View>
         <View style={styles.infoBox}>
           <MaterialIcons name="admin-panel-settings" size={30} color="blue" />
           <Text style={styles.infoText}>
-            <Text style={styles.infoLabel}> </Text>      {user.admin || "false"}</Text>
+            <Text style={styles.infoLabel}> </Text>{" "}
+            {user.admin || "You are normal user"}
+          </Text>
         </View>
       </View>
 
@@ -91,7 +99,7 @@ const UserProfile = () => {
       <View >
         <Pressable
           style={styles.editButton}
-          onPress={() => router.push('/profile/Settings')}
+          onPress={() => router.push("/profile/Settings")}
         >
           <Text style={styles.buttonText}>Edit Profile</Text>
         </Pressable>
@@ -109,8 +117,10 @@ const UserProfile = () => {
 };
 const InfoBox = ({ icon, label, value }) => (
   <View style={styles.infoBox}>
-      <FontAwesome5 name={icon} size={24} color="green" />
-      <Text style={styles.infoText}>{label}: {value}</Text>
+    <FontAwesome5 name={icon} size={24} color="green" />
+    <Text style={styles.infoText}>
+      {label}: {value}
+    </Text>
   </View>
 );
 
@@ -132,14 +142,14 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 12,
     padding: 12,
     backgroundColor: "blue",
     borderRadius: 22,
     textAlign: "center",
-    alignContent: 'center',
+    alignContent: "center",
   },
   userName: {
     color: "white",
@@ -147,6 +157,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     width: "80%",
     // marginLeft: 85,
+    width: "80%",
     textAlign: "center",
     
     // alignContent: 'center',

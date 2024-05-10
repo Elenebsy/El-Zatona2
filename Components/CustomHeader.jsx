@@ -28,14 +28,14 @@ const CustomHeader = () => {
           <FontAwesome5 name="shopping-cart" size={24} color="black"  />
          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.top}>
-            <Text style={styles.title}>Delivering to</Text>
-            <View style={styles.Location}>
-            <Text style={styles.secondTitle}>Current Location</Text>
-            <Ionicons name="chevron-down" size={20} color="green" />
-            </View>
+                <TouchableOpacity style={styles.top}>
+                    <Text style={styles.title}>Delivering to</Text>
+                    <View style={styles.Location}>
+                        <Text style={styles.secondTitle}>Current Location</Text>
+                        <Ionicons name="chevron-down" size={20} color="green" />
+                    </View>
 
-        </TouchableOpacity>
+                </TouchableOpacity>
 
         <TouchableOpacity style={styles.profile} onPress={handleShoppingCartPress} >
         <Ionicons name="person-outline" size={24} color="green" onPress={() => router.replace('/profile/profile')} />
@@ -48,10 +48,10 @@ const CustomHeader = () => {
      );
     }
 
-    const styles = StyleSheet.create({
-        safeArea:{
-            flex:1,
-            backgroundColor: '#fff',
+const styles = StyleSheet.create({
+    safeArea: {
+        flex: 1,
+        backgroundColor: '#fff',
 
         },
         container: {    
@@ -83,33 +83,33 @@ const CustomHeader = () => {
             fontWeight:'bold',
             color:'#000',
 
-        },
-        Location:{
-            flexDirection:'row',
-            alignItems:'center',
-            gap:5,
+    },
+    Location: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 5,
 
-        },
-        profile:{
-          padding:5,
-          borderRadius:50,
-            // width:30, 
-            // height:30,
-        },
-        SearchContainer:{
-            height:60, 
-            backgroundColor: '#fff',
-        },
-        SearchBar:{
-            height:40,
-            color:'#fff',
-            // borderRadius:10,
-            // marginHorizontal:20,
-            flexDirection:'row',
-            gap:10,
-            alignItems:'center',
-             paddingHorizontal:10,
-        },
+    },
+    profile: {
+        padding: 5,
+        borderRadius: 50,
+        // width:30, 
+        // height:30,
+    },
+    SearchContainer: {
+        height: 60,
+        backgroundColor: '#fff',
+    },
+    SearchBar: {
+        height: 40,
+        color: '#fff',
+        // borderRadius:10,
+        // marginHorizontal:20,
+        flexDirection: 'row',
+        gap: 10,
+        alignItems: 'center',
+        paddingHorizontal: 10,
+    },
 
         SearchBarInput:{
             flex:1,

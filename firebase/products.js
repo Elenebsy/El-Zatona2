@@ -34,23 +34,14 @@ async function getProducts() {
     getProducts();
   }
 }
-async function setProducts(product) {
+async function getProductById(id) {
   const productsCol = collection(db, "products");
-  const productref = doc(productsCol, product.id);
-  await setDoc(productref, product);
+  const docRef = doc(productsCol, id);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  }
 }
 
-async function deleteProduct(id) {
-  const productsCol = collection(db, "products");
-  const productref = doc(productsCol, id);
-  await deleteDoc(productref);
-}
-
-async function updateProduct(id, product) {
-  const productsCol = collection(db, "products");
-  const productref = doc(productsCol, id);
-  await updateDoc(productref, product);
-}
-
-
-export { getProducts , setProducts, deleteProduct, updateProduct};
+export { getProducts, getProductById };

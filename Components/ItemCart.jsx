@@ -1,39 +1,32 @@
-import { StyleSheet, Text, Pressable, View, Image } from "react-native";
+import React from "react";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import MyButton from "./MyButton";
-export default function ProductItem({
-  product,
-  onPress,
-  onConfirm,
-  onDelete
-}) {
+
+export default function ItemCart({ product, onPress, onDelete }) {
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
         { opacity: pressed ? 0.2 : 1 },
         styles.item,
-      ]}
-    >
+      ]}>
       <View style={styles.imageContainer}>
         <Image style={styles.image} source={{ uri: product.images[0] }} />
       </View>
       <View style={styles.main}>
         <Text style={styles.title}>{product.name}</Text>
         <Text style={styles.mutual}>{`${product.price} EGP`}</Text>
-
-        <View style={styles.sideBySide}>
-          <MyButton style={styles.button1} onPress={onConfirm}>
-            <Text style={{ color: "white" }}>Add to cart</Text>
-          </MyButton>
-        </View>
-      </View>
-    </Pressable>
+        <MyButton style={styles.button2} onPress={onDelete}>
+          <Text style={{ color: "white" }}>Delete</Text>
+        </MyButton>
+      </View>    </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
+    justifyContent: "center"
     // backgroundColor: "yellow"
   },
   item: {
@@ -43,19 +36,16 @@ const styles = StyleSheet.create({
     // marginHorizontal: 16,
     flexDirection: "row",
     // justifyContent: "space-between",
-    height: "auto",
+    height: 108,
   },
   title: {
-    flex: 1,
-    fontSize: 18,
-    marginRight: 20,
-    // maxHeight:7:0,
-    overflow: "hidden",
+    // flex: 1,
+    fontSize: 16,
+    // textAlign: "right",
   },
   mutual: {
     // flex: 1,
-    fontSize: 20,
-    marginRight: 20,
+    fontSize: 18,
     fontWeight: "bold",
     textAlign: "right",
   },
@@ -78,12 +68,10 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 2,
     backgroundColor: "rgb(27,116,228)",
-    borderRadius: 25,
-    marginLeft: 20,
-    marginRight: 20,
+    borderRadius: 6,
   },
   button2: {
-    flex: 1,
+    // flex:1,
     marginHorizontal: 2,
     backgroundColor: "red",
     borderRadius: 6,
