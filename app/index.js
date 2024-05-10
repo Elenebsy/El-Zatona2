@@ -14,17 +14,17 @@ export default function Page() {
         try {
           await AsyncStorage.setItem("user", JSON.stringify(user));
         } catch (error) {
-          console.error('Error storing user data:', error);
+          console.error("Error storing user data:", error);
         }
-        router.push('/(products)/');
+        router.push("/(products)/");
       } else {
         console.log("user2", user);
         try {
           await AsyncStorage.removeItem("user");
         } catch (error) {
-          console.error('Error removing user data:', error);
+          console.error("Error removing user data:", error);
         }
-        router.replace("/(account)/login");
+        router.push("/(account)/Welcome");
       }
     });
 
@@ -33,17 +33,7 @@ export default function Page() {
     };
   }, []);
 
-  
-  return (
-
-     <View style={styles.container}>
-      
-      </View>
-
-  );
-   
-   
-  
+  return <View style={styles.container}></View>;
 }
 
 const styles = StyleSheet.create({
@@ -54,5 +44,3 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
-
-

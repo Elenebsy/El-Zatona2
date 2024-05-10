@@ -6,13 +6,21 @@ import { useRouter } from "expo-router";
 import { FontAwesome5 } from "@expo/vector-icons";
 import {getUserById} from "../../firebase/review";
 import { MaterialIcons } from '@expo/vector-icons';
-
+import {logout} from "../../firebase/auth";
 
 
 
 const UserProfile = () => {
   const [user, setUser] = useState({});
   const router = useRouter();
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.push("/");
+    } catch (error) {
+      console.log("Error logging out:", error);
+    }
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -40,10 +48,10 @@ const UserProfile = () => {
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Pressable onPress={() => router.push('/course')}>
+        <Pressable onPress={() => router.push('/(products)')}>
           <AntDesign name="arrowleft" size={30} color="white" />
         </Pressable>
-        <Text style={styles.userName}>                  {user.name || "user name"}</Text>
+        <Text style={styles.userName}>{user.name || "user name"}</Text>
       </View>
 
       {/* Avatar */}
@@ -70,22 +78,30 @@ const UserProfile = () => {
         <View style={styles.infoBox}>
           <Text style={styles.infoText}>
             <AntDesign name="mail" size={30} color="blue" />
-            <Text style={styles.infoLabel}> </Text>      {user.email || "user@"} </Text>
+            <Text style={styles.infoLabel}> </Text>      {user.email || "user@example.com"} </Text>
         </View>
         <View style={styles.infoBox}>
           <MaterialIcons name="admin-panel-settings" size={30} color="blue" />
           <Text style={styles.infoText}>
-            <Text style={styles.infoLabel}> </Text>      {user.admin || "You are normal user"}</Text>
+            <Text style={styles.infoLabel}> </Text>      {user.admin || "false"}</Text>
         </View>
       </View>
 
       {/* Edit Profile Button */}
-      <View style={styles.box}>
+      <View >
         <Pressable
           style={styles.editButton}
           onPress={() => router.push('/profile/Settings')}
         >
           <Text style={styles.buttonText}>Edit Profile</Text>
+        </Pressable>
+      </View>
+      <View >
+        <Pressable
+          style={styles.editButton}
+          onPress={handleLogout}
+        >
+          <Text style={styles.buttonText}>Log Out</Text>
         </Pressable>
       </View>
     </ScrollView>
@@ -129,8 +145,10 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 23,
     fontWeight: "bold",
+    width: "80%",
     // marginLeft: 85,
     textAlign: "center",
+    
     // alignContent: 'center',
   },
   avatar: {
@@ -160,10 +178,12 @@ const styles = StyleSheet.create({
   },
   editButton: {
     backgroundColor: "blue",
-    borderRadius: 8,
     paddingVertical: 12,
+    marginBottom: 16,
     alignItems: "center",
-    borderRadius: 22,
+    borderRadius: 30,
+    width: "50%",
+    alignSelf: "center",
   },
   buttonText: {
     color: "white",

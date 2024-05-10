@@ -22,10 +22,10 @@ const Welcome = () => {
   try {
     await register(email, password, name, phone, code);
    
-    router.push('/');
+    router.push('/(products)');
   } catch (error) {
-    console.error(error);
     Alert.alert("failed", error.message);
+    console.log("check your email and password");
   }
 }
  
@@ -42,22 +42,17 @@ const Welcome = () => {
       <TextInput placeholder='Phone' style={styles.input}  value={phone} onChangeText={setPhone} />  
       <TextInput placeholder='Password' style={styles.input}  value={password} onChangeText={setPassword}  secureTextEntry/>
 
-      <Pressable style={styles.tt} onPress={() => router.push('/account/ForgetPassword')}>
+      <Pressable style={styles.tt} onPress={() => router.push('/(account)/ForgetPassword')}>
         <Text style={{ color: "blue" }}>Forget Password?</Text>
       </Pressable>
 
       <Pressable style={styles.link} onPress={handleSignUp}  >
         <Text style={styles.linkText}>Sign Up</Text>
       </Pressable>
-      <Pressable style={styles.cc} onPress={() => router.replace('/account')}>
+      <Pressable style={styles.cc} onPress={() => router.replace('/(account)/login')}>
         <Text  style={{ color: "blue" }}>Back To SignIn</Text>
       </Pressable>
-      <Text style={{color:'gray',fontWeight:'bold',fontSize:15,textAlign:"center"}}>or</Text>
-      <Text style={{color:'gray',fontWeight:'bold',fontSize:15,textAlign:"center",marginTop:-25}}>___________________________________________</Text>
-    <View style={{ flexDirection:"row",justifyContent:"space-between",marginTop:5}}>
-    <Pressable style={{marginRight:20}} ><Fontisto name="google" size={24} color="red" /></Pressable>  
-    <Pressable><FontAwesome6 name="facebook" size={24} color="blue" /></Pressable>
-    </View>
+  
 
     
     </View>

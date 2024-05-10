@@ -56,7 +56,7 @@ const CustomHeader = () => {
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.profile}>
-        <Ionicons name="person-outline" size={24} color="green" />
+        <Ionicons name="person-outline" size={24} color="green" onPress={() => router.replace('/profile/profile')} />
         </TouchableOpacity>
         </View>
       {/*<SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchItems={searchItems} />*/}
