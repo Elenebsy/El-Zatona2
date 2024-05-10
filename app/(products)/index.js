@@ -15,7 +15,7 @@ import MyButton from "../../Components/MyButton";
 import ProductItem from "../../Components/productItem";
 import CustomKeyboardView from "../../Components/CustomKeyboardView";
 import { getProducts } from "../../firebase/products";
-import { Ionicons } from '@expo/vector-icons';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { Link } from "expo-router";
 
 export default function Products() {
@@ -72,7 +72,7 @@ export default function Products() {
         </View>
         <Link href={'/'} asChild>
           <TouchableOpacity style={styles.SearchFilter}>
-            <Ionicons name="options-outline" size={20} color="green" />
+          <Ionicons name="reload" size={24} color="black" />
           </TouchableOpacity>
         </Link>
       </View>

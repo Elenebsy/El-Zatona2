@@ -1,49 +1,31 @@
-import { View , Text , StyleSheet, TouchableOpacity,Image , TextInput  } from "react-native";
+import { View , Text , StyleSheet, TouchableOpacity , TextInput  } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { React , useState} from "react";
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from "expo-router";
-
-
-// const SearchBar = () => (
-//     <View style={styles.SearchContainer}>
-//       <View style={styles.SearchBar}>
-//         <View style={styles.SearchBarInput}>
-//           <Ionicons style={styles.SearchIcon} name="search" size={24} color="#D3D3D3" />
-//           <TextInput
-//             style={styles.input}
-//             placeholder="Search"
-//             // onChangeText={(text) => {
-//             //     setSearchQuery(text);
-//             //     searchItems(text);
-//             //   }}
-//             //   value={searchQuery}
-//           />
-//         </View>
-//         <Link href={'/'} asChild>
-//           <TouchableOpacity style={styles.SearchFilter}>
-//             <Ionicons name="options-outline" size={20} color="green" />
-//           </TouchableOpacity>
-//         </Link>
-//       </View>
-//     </View>
-//   );
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import { useRouter } from "expo-router";
 
 const CustomHeader = () => {
 
+    const router = useRouter();
 
-    const handleImagePress = () => {
-        // Add your desired functionality here
-        console.log('Image pressed');
-    };
+
+    const handleShoppingCartPress = () => {
+        router.push("/cart");
+      };
+
+      const handleProfilePress = () => {
+        router.push("/profile/profile");
+        };
 
     return (
 
 
        <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>
-        <TouchableOpacity onPress={handleImagePress}>
-            <Image  style = {styles.bike} source={require('../assets/images/delivery-bike.png')} />
+        <TouchableOpacity onPress={handleShoppingCartPress} >
+          <FontAwesome5 name="shopping-cart" size={24} color="black"  />
          </TouchableOpacity>
 
         <TouchableOpacity style={styles.top}>
@@ -55,7 +37,7 @@ const CustomHeader = () => {
 
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.profile}>
+        <TouchableOpacity style={styles.profile} onPress={handleShoppingCartPress} >
         <Ionicons name="person-outline" size={24} color="green" onPress={() => router.replace('/profile/profile')} />
         </TouchableOpacity>
         </View>
