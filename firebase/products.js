@@ -63,4 +63,4 @@ async function getProductById(id) {
   }
 }
 
-export {  getProductById };
+export { getProducts, getProductById };
