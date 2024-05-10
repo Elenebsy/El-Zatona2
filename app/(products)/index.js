@@ -76,7 +76,7 @@ export default function Products() {
         )
       );
     } else {
-      setData(DATA); // Reset data to the original unfiltered data
+      setData(DATA); 
     }
   };
 
