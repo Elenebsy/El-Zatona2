@@ -17,6 +17,7 @@ import { logout } from "../../firebase/auth";
 
 const UserProfile = () => {
   const [user, setUser] = useState({});
+  const [isAdmin, setadmin] = useState(false);
   const router = useRouter();
   const handleLogout = async () => {
     try {
@@ -36,12 +37,15 @@ const UserProfile = () => {
         }
         console.log("userData1", userData);
         setUser(userData);
+
+        setadmin(userData.isAdmin);
       } catch (error) {
         console.log("Error fetching user data:", error);
       }
     };
 
     fetchData();
+
     // Add dependencies if needed
   }, []); // Empty dependency array means it will only run once after the initial render
 
@@ -84,7 +88,8 @@ const UserProfile = () => {
         <View style={styles.infoBox}>
           <Text style={styles.infoText}>
             <AntDesign name="mail" size={30} color="blue" />
-            <Text style={styles.infoLabel}> </Text> {user.email || "user@example.com"}{" "}
+            <Text style={styles.infoLabel}> </Text>{" "}
+            {user.email || "user@example.com"}{" "}
           </Text>
         </View>
         {/* <View style={styles.infoBox}>
@@ -104,6 +109,18 @@ const UserProfile = () => {
         >
           <Text style={styles.buttonText}>Edit Profile</Text>
         </Pressable>
+      </View>
+      <View>
+        {isAdmin && (
+          <View>
+            <Pressable
+              style={styles.editButton}
+              onPress={() => router.push("/(products)/addProduct")}
+            >
+              <Text style={styles.buttonText}>Add Product</Text>
+            </Pressable>
+          </View>
+        )}
       </View>
       <View>
         <Pressable style={styles.editButton} onPress={handleLogout}>

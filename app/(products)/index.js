@@ -15,8 +15,8 @@ import MyButton from "../../Components/MyButton";
 import ProductItem from "../../Components/productItem";
 import CustomKeyboardView from "../../Components/CustomKeyboardView";
 import { getProducts } from "../../firebase/products";
-import Ionicons from '@expo/vector-icons/Ionicons';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Link } from "expo-router";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -77,7 +77,7 @@ export default function Products() {
         )
       );
     } else {
-      setData(DATA); 
+      setData(DATA);
     }
   };
 
@@ -100,29 +100,33 @@ export default function Products() {
     <ActivityIndicator />
   ) : (
     <SafeAreaView style={styles.container}>
-    
-    <View style={styles.SearchContainer}>
-      <View style={styles.SearchBar}>
-        <View style={styles.SearchBarInput}>
-          <Ionicons style={styles.SearchIcon} name="search" size={24} color="#D3D3D3" onPress={() => searchItems(text)}  />
-          <TextInput
-            style={styles.input}
-            placeholder="Search"
-            onChangeText={(t) => {
-              setText(t);
-              searchItems(t);
-            }}
-          />
+      <View style={styles.SearchContainer}>
+        <View style={styles.SearchBar}>
+          <View style={styles.SearchBarInput}>
+            <Ionicons
+              style={styles.SearchIcon}
+              name="search"
+              size={24}
+              color="#D3D3D3"
+              onPress={() => searchItems(text)}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Search"
+              onChangeText={(t) => {
+                setText(t);
+                searchItems(t);
+              }}
+            />
+          </View>
+          <Link href={"/(account)/review"} asChild>
+            <TouchableOpacity style={styles.SearchFilter}>
+              <MaterialIcons name="reviews" size={24} color="black" />
+            </TouchableOpacity>
+          </Link>
         </View>
-        <Link href={'/(account)/review'} asChild>
-          <TouchableOpacity style={styles.SearchFilter}>
-          <MaterialIcons name="reviews" size={24} color="black" />
-          </TouchableOpacity>
-        </Link>
       </View>
-    </View>
 
-      
       <FlatList
         style={styles.list}
         data={data}
@@ -179,6 +183,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     justifyContent: "center",
     paddingHorizontal: 16,
+    marginTop: 50,
   },
   SearchBar: {
     height: 48,
