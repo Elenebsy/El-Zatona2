@@ -19,7 +19,7 @@ import CustomKeyboardView from "../../Components/CustomKeyboardView";
 import CustomMenuItems from "../../Components/CustomMenuItems";
 import { Platform } from "react-native";
 import { login } from "../../firebase/auth";
-import { Alert } from "react-native";
+// import { Alert } from "react-native";
 
 const Welcome = () => {
   const router = useRouter();
