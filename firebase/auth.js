@@ -8,13 +8,14 @@ import {
   signInWithCredential,
   FacebookAuthProvider,
   GoogleAuthProvider,
-  signInWithPopup
+  signInWithPopup,
+  signOut,
   
 } from "@firebase/auth";
 
 import { db } from "./Config";
 import { collection } from "@firebase/firestore";
-import {setDoc, doc, getDoc } from "@firebase/firestore"
+import {setDoc, doc, getDoc ,updateDoc } from "@firebase/firestore"
 import { getUserById } from "./review";
 // Listen for authentication state to change.
 onAuthStateChanged(auth, (user) => {
@@ -30,6 +31,11 @@ async function updateuser(user){
   const docRef = doc(usercol, auth.currentUser.uid);
   await updateDoc(docRef, user);
 }
+
+async function logout() {
+  await signOut(auth);
+}
+
 async function register(email, password, name, phone, code) {
   
   const cred = await createUserWithEmailAndPassword(auth, email, password);
@@ -74,4 +80,4 @@ async function signInWithGoogle() {
   });
 }
 
-export { register, login, forgetPassword };
+export { register, login, forgetPassword ,updateuser};

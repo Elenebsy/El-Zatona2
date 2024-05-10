@@ -30,11 +30,15 @@ export default function Cart() {
 
   const searchItems = (searchFor) => {
     console.log("searchFor", searchFor);
+    if(searchFor){
     setData(
       DATA.filter((user) =>
         user.name.toLowerCase().includes(searchFor.toLowerCase())
       )
     );
+   } else {
+    setData(DATA); 
+    }
   };
 
   const getData = async () => {

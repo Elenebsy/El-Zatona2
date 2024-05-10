@@ -20,6 +20,7 @@ import CustomMenuItems from "../../Components/CustomMenuItems";
 import { Platform } from "react-native";
 import { login } from "../../firebase/auth";
 
+
 const Welcome = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
@@ -27,20 +28,10 @@ const Welcome = () => {
   const handleLogin = async () => {
     try {
       await login(email, password);
-      router.push("/(products)/");
+      router.push("/(products)");
     } catch (error) {
-      // console.error(error);
       Alert.alert("failed", error.message);
       console.log("check your email and password");
-    }
-  };
-  const handleGoogle = async () => {
-    try {
-      await signInWithGoogle();
-      router.push("/");
-    } catch (error) {
-      // console.error(error);
-      Alert.alert("failed", error.message);
     }
   };
 

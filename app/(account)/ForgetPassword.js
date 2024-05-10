@@ -23,9 +23,8 @@ const Welcome = () => {
   const handleForgetpassword = async () => {
     try {
       await forgetPassword(email);
-      router.push("/account");
+      router.push("/(account)/login");
     } catch (error) {
-      // console.error(error);
       Alert.alert("failed", error.message);
       console.log("check your email ");
     }
@@ -51,7 +50,10 @@ const Welcome = () => {
         <Pressable style={styles.button} onPress={handleForgetpassword}>
           <Text style={styles.buttonText}>Submit</Text>
         </Pressable>
-        <Pressable style={styles.link} onPress={() => router.push("/account")}>
+        <Pressable
+          style={styles.link}
+          onPress={() => router.push("/(account)/login")}
+        >
           <Text style={styles.linkText}>Back to Sign In</Text>
         </Pressable>
       </View>

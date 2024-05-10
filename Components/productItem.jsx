@@ -1,16 +1,25 @@
+import React, { useState } from "react";
 import { StyleSheet, Text, Pressable, View, Image } from "react-native";
 import MyButton from "./MyButton";
-export default function ProductItem({
-  product,
-  onPress,
-  onConfirm,
-  onDelete
-}) {
+
+const ProductItem = ({ product, onPress, onConfirm }) => {
+  const [quantity, setQuantity] = useState(1);
+
+  const decreaseQuantity = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const increaseQuantity = () => {
+    setQuantity(quantity + 1);
+  };
+
   return (
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
-        { opacity: pressed ? 0.2 : 1 },
+        { opacity: pressed ? 0.5 : 1 },
         styles.item,
       ]}
     >
@@ -18,74 +27,125 @@ export default function ProductItem({
         <Image style={styles.image} source={{ uri: product.images[0] }} />
       </View>
       <View style={styles.main}>
-        <Text style={styles.title}>{product.name}</Text>
-        <Text style={styles.mutual}>{`${product.price} EGP`}</Text>
-
-        <View style={styles.sideBySide}>
-          <MyButton style={styles.button1} onPress={onConfirm}>
-            <Text style={{ color: "white" }}>Add to cart</Text>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title} numberOfLines={2}>
+            {product.name}
+          </Text>
+        </View>
+        <View style={styles.priceContainer}>
+          <Text style={styles.price}>{`${product.price} EGP`}</Text>
+        </View>
+        <View style={styles.quantityContainer}>
+          <MyButton style={styles.quantityButton} onPress={decreaseQuantity}>
+            <Text style={styles.quantityButtonText}>-</Text>
+          </MyButton>
+          <Text style={styles.quantity}>{quantity}</Text>
+          <MyButton style={styles.quantityButton} onPress={increaseQuantity}>
+            <Text style={styles.quantityButtonText}>+</Text>
+          </MyButton>
+        </View>
+        <View style={styles.buttonContainer}>
+          <MyButton style={styles.button} onPress={onConfirm}>
+            <Text style={styles.buttonText}>Add to Cart</Text>
           </MyButton>
         </View>
       </View>
     </Pressable>
   );
-}
+};
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    // backgroundColor: "yellow"
-  },
+   padding: 10,
+  }, 
   item: {
-    // backgroundColor: "#f9c2ff",
-    padding: 5,
-    marginVertical: 1,
-    // marginHorizontal: 16,
     flexDirection: "row",
-    // justifyContent: "space-between",
-    height: "auto",
-  },
-  title: {
-    flex: 1,
-    fontSize: 18,
-    marginRight: 20,
-    // maxHeight:7:0,
-    overflow: "hidden",
-  },
-  mutual: {
-    // flex: 1,
-    fontSize: 20,
-    marginRight: 20,
-    fontWeight: "bold",
-    textAlign: "right",
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 5,
+    marginVertical: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.23,
+    shadowRadius: 2.62,
+    elevation: 4,
   },
   imageContainer: {
-    width: 110,
-    height: 110,
+     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    padding: 5,
+    
   },
   image: {
-    width: 90,
-    height: 90,
-    borderRadius: 45,
-    objectFit: "contain",
+    width: 200,
+    height: 200,
   },
-  sideBySide: {
+ 
+  titleContainer: {
+    flex: 1,
+    justifyContent: "center",
+    marginBottom: 10,
+
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: "bold",
+
+
+  },
+  priceContainer: {
+   alignItems: "center",
+   marginBottom: 10,
+   marginLeft: 10,
+  },
+  price: {
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#007AFF",
+  },
+  quantityContainer: {
     flexDirection: "row",
+    marginTop: 10,
+    marginLeft: 5,
+    padding: 10,
   },
-  button1: {
-    flex: 1,
-    marginHorizontal: 2,
-    backgroundColor: "rgb(27,116,228)",
-    borderRadius: 25,
-    marginLeft: 20,
-    marginRight: 20,
+  quantityButton: {
+    backgroundColor: "#007AFF", 
+    borderRadius: 50,
+    width: 30,
+    height: 30,
+   textAlign: 'center',
+    padding: 5,
   },
-  button2: {
-    flex: 1,
-    marginHorizontal: 2,
-    backgroundColor: "red",
-    borderRadius: 6,
-  }
+  quantityButtonText: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  quantity: {
+    marginHorizontal: 10,
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  buttonContainer: {
+    alignItems: "flex-end",
+  },
+  button: {
+    backgroundColor: "#007AFF",
+    borderRadius: 20,
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+  },
+  buttonText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });
+
+export default ProductItem;
