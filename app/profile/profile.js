@@ -84,16 +84,16 @@ const UserProfile = () => {
         <View style={styles.infoBox}>
           <Text style={styles.infoText}>
             <AntDesign name="mail" size={30} color="blue" />
-            <Text style={styles.infoLabel}> </Text> {user.email || "user@"}{" "}
+            <Text style={styles.infoLabel}> </Text> {user.email || "user@example.com"}{" "}
           </Text>
         </View>
-        <View style={styles.infoBox}>
+        {/* <View style={styles.infoBox}>
           <MaterialIcons name="admin-panel-settings" size={30} color="blue" />
           <Text style={styles.infoText}>
             <Text style={styles.infoLabel}> </Text>{" "}
-            {user.admin || "You are normal user"}
+            {user.admin || "false"}
           </Text>
-        </View>
+        </View> */}
       </View>
 
       {/* Edit Profile Button */}

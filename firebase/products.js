@@ -46,9 +46,9 @@ async function deleteProduct(id) {
   await deleteDoc(productref);
 }
 
-async function updateProduct(id, product) {
+async function updateProduct( product) {
   const productsCol = collection(db, "products");
-  const productref = doc(productsCol, id);
+  const productref = doc(productsCol,product.id);
   await updateDoc(productref, product);
 }
 async function getProductById(id) {

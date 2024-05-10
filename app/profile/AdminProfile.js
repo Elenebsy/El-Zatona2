@@ -84,16 +84,16 @@ const UserProfile = () => {
         <View style={styles.infoBox}>
           <Text style={styles.infoText}>
             <AntDesign name="mail" size={30} color="blue" />
-            <Text style={styles.infoLabel}> </Text> {user.email || "user@"}{" "}
+            <Text style={styles.infoLabel}> </Text> {user.email || "user@example.com"}{" "}
           </Text>
         </View>
-        <View style={styles.infoBox}>
+        {/* <View style={styles.infoBox}>
           <MaterialIcons name="admin-panel-settings" size={30} color="blue" />
           <Text style={styles.infoText}>
             <Text style={styles.infoLabel}> </Text>{" "}
-            {user.admin || "You are normal user"}
+            {user.admin || "true"}
           </Text>
-        </View>
+        </View> */}
       </View>
 
       {/* Edit Profile Button */}
@@ -111,16 +111,17 @@ const UserProfile = () => {
         </Pressable>
       </View>
       <View style={styles.box1} >
-        <Pressable style={styles.editButton1} onPress={handleLogout}>
+        <Pressable style={styles.editButton1} onPress={() => router.push("/(products)/addProduct")}>
           <Text style={styles.buttonText}>Add Product</Text>
         </Pressable>
-        <Pressable style={styles.editButton1} onPress={handleLogout}>
+        <Pressable style={styles.editButton1} onPress={() => router.push("/(products)/deleteProduct")}>
           <Text style={styles.buttonText}>delete Product</Text>
         </Pressable>
-        <Pressable style={styles.editButton1} onPress={handleLogout}>
+        
+      </View>
+      <Pressable style={styles.editButton} onPress={() => router.push("/(products)/updateProduct")}>
           <Text style={styles.buttonText}>update Product</Text>
         </Pressable>
-      </View>
     </ScrollView>
   );
 };
@@ -210,16 +211,17 @@ const styles = StyleSheet.create({
     fontSize: 23,
     fontWeight: "bold",
   },
-  editButton1: {
+    box1: {
       flexDirection: "row",
   },
-  box1: {
+  editButton1: {
     backgroundColor: "blue",
     paddingVertical: 12,
     marginBottom: 16,
+    marginLeft: 16,
     alignItems: "center",
     borderRadius: 30,
-    width: "20%",
+    width: "45%",
     alignSelf: "center",
   }
 });

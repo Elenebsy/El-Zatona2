@@ -4,33 +4,32 @@ import { getProductById } from "../../firebase/products";
 import { useLocalSearchParams } from "expo-router";
 import MyButton from "../../Components/MyButton";
 import { getUserById } from "../../firebase/review";
+import { deleteProduct, updateProduct } from "../../firebase/products";
+import { useRouter } from "expo-router";
 export default function Product() {
   const { id } = useLocalSearchParams();
-
+  const router = useRouter();
   const [product, setProduct] = useState(null);
-  const [isAdmin, setAdmin] = useState(false);
-  const [disbled, setDisabled] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [disabled, setDisabled] = useState(true); // Start with disabled state as true
   const [user, setUser] = useState({});
 
   useEffect(() => {
     fetchProduct();
-
     fetchUser();
-    console.log("user", user);
-
-    if (user) {
-      console.log("user", user);
-      if (user.isAdmin) {
-        setAdmin(true);
-        console.log("isAdmin", isAdmin);
-      }
-    }
-    if (isAdmin) {
-      setDisabled("flex");
-    } else {
-      setDisabled("none");
-    }
   }, [id]);
+
+  useEffect(() => {
+    // Check if the user is admin and set disabled state accordingly
+    if (user.isAdmin) {
+      setIsAdmin(true);
+      setDisabled(false);
+    } else {
+      setIsAdmin(false);
+      setDisabled(true);
+    }
+  }, [user]);
+
   const fetchUser = async () => {
     try {
       const userData = await getUserById();
@@ -38,21 +37,41 @@ export default function Product() {
         console.error("User data not found, cannot post comment.");
         return;
       }
-      console.log("userData1", userData);
       setUser(userData);
-      console.log("usddder", user);
     } catch (error) {
       console.log("Error fetching user data:", error);
     }
   };
+
   const fetchProduct = async () => {
     try {
-      console.log("id", id);
       const data = await getProductById(id);
-      console.log("data", data);
       setProduct(data);
     } catch (error) {
       console.error("Error fetching product:", error);
+    }
+  };
+
+  const handleUpdateProduct = () => {
+    // Only perform update action if user is admin
+    if (isAdmin) {
+      router.push(`/(products)/updateProduct/${id}`);
+      console.log("Update product");
+    }
+  };
+
+  const handleDeleteProduct = async () => {
+    // Only perform delete action if user is admin
+    if (isAdmin) {
+      try {
+        await deleteProduct(id);
+        console.log("Product deleted successfully");
+        router.push("/(products)");
+      }
+      catch (error) {
+        console.error("Error deleting product:", error);
+      }
+
     }
   };
 
@@ -81,26 +100,21 @@ export default function Product() {
         <Text style={styles.text}>Max: {product.max}</Text>
       )}
 
-      {/* <View style={{ marginTop: 10 }}> */}
-      <MyButton
-        style={styles.button}
-        onPress={() => console.log("Add to cart")}
-      >
+      <MyButton style={styles.button} onPress={() => console.log("Add to cart")}>
         <Text style={{ color: "white" }}>Add to cart</Text>
       </MyButton>
       <MyButton
-        style={{ ...styles.button, display: disbled }}
-        onPress={() => console.log("update product")}
+        style={{ ...styles.button, display: disabled ? "none" : "flex" }}
+        onPress={handleUpdateProduct} // Call handleUpdateProduct function
       >
-        <Text style={{ color: "white" }}>update product</Text>
+        <Text style={{ color: "white" }}>Update product</Text>
       </MyButton>
       <MyButton
-        style={{ ...styles.button, display: disbled }}
-        onPress={() => console.log("Delete product")}
+        style={{ ...styles.button, display: disabled ? "none" : "flex" }}
+        onPress={handleDeleteProduct} // Call handleDeleteProduct function
       >
         <Text style={{ color: "white" }}>Delete product</Text>
       </MyButton>
-      {/* </View> */}
     </View>
   );
 }
