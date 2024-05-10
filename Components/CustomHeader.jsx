@@ -12,7 +12,7 @@ const SearchBar = () => (
                 <Ionicons style={styles.SearchIcon} name="search" size={24} color="#D3D3D3" />
                 <TextInput style={styles.input} placeholder="Search" />
             </View>
-            <Link href={'/'} asChild>
+            <Link href={'/(account)/review'} asChild>
                 <TouchableOpacity style={styles.SearchFilter}>
                     <Ionicons name="options-outline" size={20} color="green" />
                 </TouchableOpacity>
@@ -39,7 +39,7 @@ const CustomHeader = () => {
 
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.profile}>
+                <TouchableOpacity style={styles.profile} onPress={() => router.push('/profile/profile')} >
                     <Ionicons name="person-outline" size={24} color="green" />
                 </TouchableOpacity>
             </View>

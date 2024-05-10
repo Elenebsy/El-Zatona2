@@ -80,4 +80,4 @@ async function signInWithGoogle() {
   });
 }
 
-export { register, login, forgetPassword ,updateuser};
+export { register, login, forgetPassword ,updateuser,logout,signInWithGoogle};
