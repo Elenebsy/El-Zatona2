@@ -6,6 +6,7 @@ import {
   Pressable,
   Image,
   ScrollView,
+  Alert,
 } from "react-native";
 import React, { useState } from "react";
 import { useRouter } from "expo-router";
@@ -29,12 +30,10 @@ const Welcome = () => {
       await login(email, password);
       router.push("/(products)");
     } catch (error) {
-;
       Alert.alert("failed", error.message);
       console.log("check your email and password");
     }
   };
- 
 
   return (
     <ScrollView>

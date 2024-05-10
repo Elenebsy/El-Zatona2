@@ -52,5 +52,15 @@ async function updateProduct(id, product) {
   await updateDoc(productref, product);
 }
 
+export { getProducts, setProducts, deleteProduct, updateProduct };
+async function getProductById(id) {
+  const productsCol = collection(db, "products");
+  const docRef = doc(productsCol, id);
+  const docSnap = await getDoc(docRef);
 
-export { getProducts , setProducts, deleteProduct, updateProduct};
+  if (docSnap.exists()) {
+    return docSnap.data();
+  }
+}
+
+export { getProducts, getProductById };
