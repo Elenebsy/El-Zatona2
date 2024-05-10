@@ -26,7 +26,7 @@ const firebaseConfig = {
   projectId: "el-zatona-6013a",
   storageBucket: "el-zatona-6013a.appspot.com",
   messagingSenderId: "13856631772",
-  appId: "1:13856631772:web:8750bab4ccee2704643d19"
+  appId: "1:13856631772:web:8750bab4ccee2704643d19",
 };
 
 // Initialize Firebase

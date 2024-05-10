@@ -1,6 +1,6 @@
 import { View , Text , StyleSheet, TouchableOpacity , TextInput  } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { React , useState} from "react";
+import { React, useState } from "react";
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from "expo-router";
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';

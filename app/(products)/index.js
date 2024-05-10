@@ -8,9 +8,9 @@ import {
   FlatList,
   ActivityIndicator,
   ScrollView,
-  TouchableOpacity 
+  TouchableOpacity,
 } from "react-native";
-import { SafeAreaView } from 'react-native-safe-area-context'
+import { SafeAreaView } from "react-native-safe-area-context";
 import MyButton from "../../Components/MyButton";
 import ProductItem from "../../Components/productItem";
 import CustomKeyboardView from "../../Components/CustomKeyboardView";
@@ -69,7 +69,7 @@ export default function Products() {
 
   const searchItems = (searchFor) => {
     console.log("searchFor", searchFor);
-    if(searchFor){
+    if (searchFor) {
       setData(
         DATA.filter((user) =>
           user.name.toLowerCase().includes(searchFor.toLowerCase())
@@ -126,7 +126,7 @@ export default function Products() {
         style={styles.list}
         data={data}
         // keyExtractor={(item) => item.id}
-       
+
         contentContainerStyle={styles.listContent}
         renderItem={({ item: product }) => (
           <ProductItem
@@ -148,8 +148,7 @@ const styles = StyleSheet.create({
     width: "100%",
     display: "flex",
   },
-  
- 
+
   list: {
     flex: 1,
     // flexGrow: 1,
@@ -174,39 +173,35 @@ const styles = StyleSheet.create({
     // flexWrap: "wrap"
   },
   text: { color: "white" },
-  SearchContainer:{
+  SearchContainer: {
     height: 80,
     backgroundColor: "#fff",
     justifyContent: "center",
     paddingHorizontal: 16,
+  },
+  SearchBar: {
+    height: 48,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#f0f0f0",
+    borderRadius: 24,
+    paddingHorizontal: 16,
+  },
 
-},
-SearchBar:{
-  height: 48,
-  flexDirection: "row",
-  alignItems: "center",
-  backgroundColor: "#f0f0f0",
-  borderRadius: 24,
-  paddingHorizontal: 16,
-},
-
-SearchBarInput:{
-  flex: 1,
-  flexDirection: "row",
-  alignItems: "center",
-   
-},
-SearchFilter:{
-  marginLeft: 16,
-},
-input:{
-  flex: 1,
-  fontSize: 16,
-  color: "#333",
-},
-SearchIcon:{ 
-  marginRight: 8,
-  }
-}
-
-);
+  SearchBarInput: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  SearchFilter: {
+    marginLeft: 16,
+  },
+  input: {
+    flex: 1,
+    fontSize: 16,
+    color: "#333",
+  },
+  SearchIcon: {
+    marginRight: 8,
+  },
+});

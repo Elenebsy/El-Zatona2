@@ -13,6 +13,7 @@ import { useRouter } from "expo-router";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { getUserById } from "../../firebase/review";
 import { MaterialIcons } from "@expo/vector-icons";
+import { logout } from "../../firebase/auth";
 
 const UserProfile = () => {
   const [user, setUser] = useState({});
@@ -24,7 +25,7 @@ const UserProfile = () => {
     } catch (error) {
       console.log("Error logging out:", error);
     }
-  }
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,10 +49,10 @@ const UserProfile = () => {
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Pressable onPress={() => router.push("/course")}>
+        <Pressable onPress={() => router.push("/(products)")}>
           <AntDesign name="arrowleft" size={30} color="white" />
         </Pressable>
-        <Text style={styles.userName}> {user.name || "user name"}</Text>
+        <Text style={styles.userName}>{user.name || "user name"}</Text>
       </View>
 
       {/* Avatar */}
@@ -96,7 +97,7 @@ const UserProfile = () => {
       </View>
 
       {/* Edit Profile Button */}
-      <View >
+      <View>
         <Pressable
           style={styles.editButton}
           onPress={() => router.push("/profile/Settings")}
@@ -104,11 +105,8 @@ const UserProfile = () => {
           <Text style={styles.buttonText}>Edit Profile</Text>
         </Pressable>
       </View>
-      <View >
-        <Pressable
-          style={styles.editButton}
-          onPress={handleLogout}
-        >
+      <View>
+        <Pressable style={styles.editButton} onPress={handleLogout}>
           <Text style={styles.buttonText}>Log Out</Text>
         </Pressable>
       </View>
@@ -159,7 +157,7 @@ const styles = StyleSheet.create({
     // marginLeft: 85,
     width: "80%",
     textAlign: "center",
-    
+
     // alignContent: 'center',
   },
   avatar: {
