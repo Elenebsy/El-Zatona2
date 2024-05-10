@@ -1,31 +1,50 @@
-import { View , Text , StyleSheet, TouchableOpacity,Image , TextInput } from "react-native";
+import { View , Text , StyleSheet, TouchableOpacity,Image , TextInput  } from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { React } from "react";
+import { React , useState} from "react";
 import { Ionicons } from '@expo/vector-icons';
-import { Link, useRouter } from "expo-router";
-const SearchBar = () => (
-<View style={styles.SearchContainer}>
-    <View style={styles.SearchBar}>
-        <View style={styles.SearchBarInput}>
-           <Ionicons style={styles.SearchIcon} name="search" size={24} color="#D3D3D3" />
-            <TextInput style={styles.input} placeholder="Search" />
-        </View>
-        <Link href={'/'} asChild>
-            <TouchableOpacity style={styles.SearchFilter}>
-                <Ionicons name="options-outline" size={20} color="green" />
-                </TouchableOpacity>
-        </Link>
-        </View>
-    </View>
-)
+import { Link } from "expo-router";
+
+
+// const SearchBar = () => (
+//     <View style={styles.SearchContainer}>
+//       <View style={styles.SearchBar}>
+//         <View style={styles.SearchBarInput}>
+//           <Ionicons style={styles.SearchIcon} name="search" size={24} color="#D3D3D3" />
+//           <TextInput
+//             style={styles.input}
+//             placeholder="Search"
+//             // onChangeText={(text) => {
+//             //     setSearchQuery(text);
+//             //     searchItems(text);
+//             //   }}
+//             //   value={searchQuery}
+//           />
+//         </View>
+//         <Link href={'/'} asChild>
+//           <TouchableOpacity style={styles.SearchFilter}>
+//             <Ionicons name="options-outline" size={20} color="green" />
+//           </TouchableOpacity>
+//         </Link>
+//       </View>
+//     </View>
+//   );
+
 const CustomHeader = () => {
-    const router = useRouter();
+
+
+    const handleImagePress = () => {
+        // Add your desired functionality here
+        console.log('Image pressed');
+    };
+
     return (
+
+
        <SafeAreaView style={styles.safeArea}>
         <View style={styles.container}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handleImagePress}>
             <Image  style = {styles.bike} source={require('../assets/images/delivery-bike.png')} />
-        </TouchableOpacity>
+         </TouchableOpacity>
 
         <TouchableOpacity style={styles.top}>
             <Text style={styles.title}>Delivering to</Text>
@@ -40,8 +59,10 @@ const CustomHeader = () => {
         <Ionicons name="person-outline" size={24} color="green" onPress={() => router.replace('/profile/profile')} />
         </TouchableOpacity>
         </View>
-        <SearchBar />
+      {/*<SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} searchItems={searchItems} />*/}
        </SafeAreaView>
+
+
      );
     }
 
@@ -56,7 +77,7 @@ const CustomHeader = () => {
             backgroundColor: '#fff', 
             flexDirection:'row',
              gap:20,
-             allignitem:'center',   
+             alignitem:'center',   
              justifyContent:'space-between',
              paddingHorizontal:15,
              paddingTop:15,
@@ -64,6 +85,7 @@ const CustomHeader = () => {
         bike:{
             width:30, 
             height:30,
+            
             
         },
         top:{
@@ -129,6 +151,7 @@ const CustomHeader = () => {
             paddingLeft:10,
         }
         ,
+        
     });
 
 export default CustomHeader;
