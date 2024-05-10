@@ -32,9 +32,10 @@ const Welcome = () => {
 
   return (
     <ScrollView>
+      <Text style={{ fontSize: 30, fontWeight: "bold" ,textAlign:"center",color:"green",marginBottom:-20}}>Create an Account</Text>
     <View style={styles.container}>
       <Image source={logo} style={styles.image} />
-      <Text style={styles.title}>Create an Account</Text>
+      
 
       <TextInput placeholder='Email' style={styles.input}  value={email} onChangeText={setEmail}/>
       <TextInput placeholder='Name' style={styles.input} value={name} onChangeText={setName}/>
@@ -49,7 +50,7 @@ const Welcome = () => {
       <Pressable style={styles.link} onPress={handleSignUp}  >
         <Text style={styles.linkText}>Sign Up</Text>
       </Pressable>
-      <Pressable style={styles.cc} onPress={() => router.replace('/(account)/login')}>
+      <Pressable style={{marginTop:10}} onPress={() => router.replace('/(account)/login')}>
         <Text  style={{ color: "blue" }}>Back To SignIn</Text>
       </Pressable>
   
@@ -94,7 +95,7 @@ const styles = StyleSheet.create({
   },
   linkText: {
     color: "white",
-    fontSize: 16,
+    fontSize: 20,
   },
   error: {
     fontSize: 14,
