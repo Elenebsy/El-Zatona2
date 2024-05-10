@@ -16,6 +16,7 @@ import ProductItem from "../../Components/productItem";
 import CustomKeyboardView from "../../Components/CustomKeyboardView";
 import { getProducts } from "../../firebase/products";
 import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Link } from "expo-router";
 import { useRouter } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -113,9 +114,9 @@ export default function Products() {
             }}
           />
         </View>
-        <Link href={'/'} asChild>
+        <Link href={'/(account)/review'} asChild>
           <TouchableOpacity style={styles.SearchFilter}>
-          <Ionicons name="reload" size={24} color="black" />
+          <MaterialIcons name="reviews" size={24} color="black" />
           </TouchableOpacity>
         </Link>
       </View>
