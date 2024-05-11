@@ -19,13 +19,13 @@ import {
 } from "@env";
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: API_KEY,
-  authDomain: AUTH_DOMAIN,
-  databaseURL: DATABASE_URL,
-  projectId: PROJECT_ID,
-  storageBucket: STORAGE_BUCKET,
-  messagingSenderId: MESSAGING_SENDER_ID,
-  appId: APP_ID,
+  apiKey: "AIzaSyD4y_HcrmvVOMXd7wb_ci56QJCbBha212Y",
+  authDomain: "el-zatona-6013a.firebaseapp.com",
+  databaseURL: "https://el-zatona-6013a-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "el-zatona-6013a",
+  storageBucket: "el-zatona-6013a.appspot.com",
+  messagingSenderId: "13856631772",
+  appId: "1:13856631772:web:8750bab4ccee2704643d19",
 };
 
 // Initialize Firebase
