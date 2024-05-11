@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, TextInput, Pressable, Switch, Text, StyleSheet } from "react-native";
 import { setProducts } from "../../firebase/products";
-
+import {router} from 'expo-router';
 const AddProduct = () => {
     const [product, setProduct] = useState({
         name: "",
@@ -17,6 +17,7 @@ const AddProduct = () => {
         console.log("name",product);
         try {
             await setProducts(product);
+            router.push("/(products)/");
         } catch (error) {
             console.log("Error adding product:", error);
         }

@@ -16,6 +16,13 @@ export default function Layout() {
           header: () => <CustomHeader />,
         }}
       />
+      <Stack.Screen
+        name="[id]"
+        options={{
+          header: () => <CustomHeader />,
+        }}
+        
+      />
     </Stack>
   );
 }

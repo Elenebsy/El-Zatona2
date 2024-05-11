@@ -45,7 +45,7 @@ const UpdateProduct = () => {
     console.log("Updated product", product);
     try {
       await updateProduct(product);
-      router.push("/(products)");
+      router.push("/(products)/");
     } catch (error) {
       console.log("Error updating product:", error);
     }

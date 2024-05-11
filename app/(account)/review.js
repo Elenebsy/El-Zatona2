@@ -20,7 +20,7 @@ const CommentBox = () => {
         setLoading(true);
         const postedComment = await postComment(comment);
         if (postedComment) {
-            setReviews(prevReviews => [...prevReviews, postedComment]);
+            setReviews(prevReviews => [postedComment, ...prevReviews]);
             setComment('');
         }
         setLoading(false);
@@ -40,6 +40,19 @@ const CommentBox = () => {
     useEffect(() => {
         handleGetReviews();
     }, []);
+
+    useEffect(() => {
+        const fetchReviews = async () => {
+            try {
+                const fetchedReviews = await getReviews();
+                setReviews(fetchedReviews);
+            } catch (error) {
+                console.error('Error fetching reviews:', error);
+            }
+        };
+
+        fetchReviews();
+    }, [reviews]); 
 
     return (
         <View style={styles.container}>
