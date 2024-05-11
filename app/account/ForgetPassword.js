@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, TextInput, Pressable, Alert,Image ,ScrollView} from 'react-native';
 import React, { useState } from 'react';
 import { useRouter } from 'expo-router';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/forgetpassword.png';
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -12,12 +12,17 @@ const Welcome = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const handleForgetpassword = async() => {
-    await forgetPassword(email);
-    Alert.alert("Password Reset", "Password reset email has been sent");
-    router.push('/account');
+    try{
+      await forgetPassword(email);
+      router.push('/account');
+    }catch(error){
+      console.error(error);
+      Alert.alert("failed", error.message);
+      console.log("check your email ");
+    }
   }
   
- 
+
   return (
     <ScrollView>
     <View style={styles.container}>
@@ -96,8 +101,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   image: {
-    width:wp(70),
-    height:hp(40),
+    width:wp(60),
+    height:hp(30),
 
    
    

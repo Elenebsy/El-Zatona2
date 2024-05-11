@@ -14,7 +14,7 @@ export default function MyButton({ onPress, style, children, color }) {
         style || {}
       ]}
     >
-      <Text>{children}</Text>
+      {children}
     </Pressable>
   );
 };
@@ -24,7 +24,9 @@ const styles = StyleSheet.create({
     // flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 2,
+    borderRadius: 30,
+    marginRight: 15,
+    marginLeft: 15,
     padding: 8,
   },
 });

@@ -1,5 +1,5 @@
 import React from "react";
-import { KeyboardAvoidingView, ScrollView, StyleSheet, View } from "react-native";
+import { KeyboardAvoidingView, ScrollView, StyleSheet, View, Platform } from "react-native";
 
 export default function CustomKeyboardView({ children }) {
 
@@ -17,6 +17,6 @@ export default function CustomKeyboardView({ children }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 0.1,
   },
 })

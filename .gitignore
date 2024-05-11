@@ -3,6 +3,9 @@
 # dependencies
 node_modules/
 
+# Secrets to hide
+.env
+
 # Expo
 .expo/
 dist/

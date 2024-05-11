@@ -2,12 +2,21 @@
 import { initializeApp } from "firebase/app";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-import { initializeAuth } from "@firebase/auth";
+import { initializeAuth, getAuth } from "@firebase/auth";
 import { getReactNativePersistence } from "@firebase/auth/dist/rn/index.js";
 import { AsyncStorage } from "@react-native-async-storage/async-storage";
 import { getFirestore, collection } from "@firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getDatabase } from "@firebase/database";
+import {
+  API_KEY,
+  AUTH_DOMAIN,
+  DATABASE_URL,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGING_SENDER_ID,
+  APP_ID,
+} from "@env";
 // Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyD4y_HcrmvVOMXd7wb_ci56QJCbBha212Y",
@@ -25,11 +34,8 @@ const app = initializeApp(firebaseConfig);
 export const auth = initializeAuth(app, {
   persistence: getReactNativePersistence(AsyncStorage),
 });
+// export const authentication = getAuth(app);
 
 export const db = getFirestore(app);
-export const storage = getStorage(app);
+export const storage = getStorage(app, "gs://el-zatona-6013a.appspot.com");
 export const database = getDatabase(app);
-
-export const usersRef = collection(db, "users");
-
-export const roomsRef = collection(db, "rooms");
