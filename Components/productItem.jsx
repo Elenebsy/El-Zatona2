@@ -35,7 +35,7 @@ const ProductItem = ({ product, onPress, onConfirm }) => {
         <View style={styles.priceContainer}>
           <Text style={styles.price}>{`${product.price} EGP`}</Text>
         </View>
-        <View style={styles.quantityContainer}>
+        {/* <View style={styles.quantityContainer}>
           <MyButton style={styles.quantityButton} onPress={decreaseQuantity}>
             <Text style={styles.quantityButtonText}>-</Text>
           </MyButton>
@@ -43,7 +43,7 @@ const ProductItem = ({ product, onPress, onConfirm }) => {
           <MyButton style={styles.quantityButton} onPress={increaseQuantity}>
             <Text style={styles.quantityButtonText}>+</Text>
           </MyButton>
-        </View>
+        </View> */}
         <View style={styles.buttonContainer}>
           <MyButton style={styles.button} onPress={onConfirm}>
             <Text style={styles.buttonText}>Add to Cart</Text>
@@ -57,8 +57,8 @@ const ProductItem = ({ product, onPress, onConfirm }) => {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-   padding: 10,
-  }, 
+    padding: 10,
+  },
   item: {
     flexDirection: "row",
     backgroundColor: "#fff",
@@ -75,17 +75,17 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   imageContainer: {
-     flex: 1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
     padding: 5,
-    
+
   },
   image: {
     width: 200,
     height: 200,
   },
- 
+
   titleContainer: {
     flex: 1,
     justifyContent: "center",
@@ -99,9 +99,9 @@ const styles = StyleSheet.create({
 
   },
   priceContainer: {
-   alignItems: "center",
-   marginBottom: 10,
-   marginLeft: 10,
+    alignItems: "center",
+    marginBottom: 10,
+    marginLeft: 10,
   },
   price: {
     fontSize: 16,
@@ -115,11 +115,11 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   quantityButton: {
-    backgroundColor: "#007AFF", 
+    backgroundColor: "#007AFF",
     borderRadius: 50,
     width: 30,
     height: 30,
-   textAlign: 'center',
+    textAlign: 'center',
     padding: 5,
   },
   quantityButtonText: {

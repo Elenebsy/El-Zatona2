@@ -42,7 +42,7 @@ export default function ItemCart({ product, onPress, onDelete }) {
           </Pressable>
         </View>
         <MyButton style={styles.button2} onPress={onDelete}>
-          <Text style={{ color: "white" }}>Delete</Text>
+          <Text style={{ color: "white", fontWeight: "bold" }}>Delete</Text>
         </MyButton>
       </View>
     </Pressable>

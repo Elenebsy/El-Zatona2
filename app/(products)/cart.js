@@ -30,14 +30,14 @@ export default function Cart() {
 
   const searchItems = (searchFor) => {
     console.log("searchFor", searchFor);
-    if(searchFor){
-    setData(
-      DATA.filter((user) =>
-        user.name.toLowerCase().includes(searchFor.toLowerCase())
-      )
-    );
-   } else {
-    setData(DATA); 
+    if (searchFor) {
+      setData(
+        DATA.filter((user) =>
+          user.name.toLowerCase().includes(searchFor.toLowerCase())
+        )
+      );
+    } else {
+      setData(DATA);
     }
   };
 
@@ -128,7 +128,16 @@ export default function Cart() {
           />
         )}
       />
-      <MyButton color="green" onPress={checkout}>
+      <MyButton
+        color="blue"
+        onPress={checkout}
+        style={{
+          width: "50%",
+          justifyContent: "center",
+          alignSelf: "center",
+          fontWeight: "bold",
+        }}
+      >
         <Text style={styles.text}>Checkout</Text>
       </MyButton>
     </View>
@@ -144,13 +153,14 @@ const styles = StyleSheet.create({
   top1: {
     flex: 0.1,
     margin: 5,
+    marginTop: 50,
     padding: 15,
     width: "100%",
   },
   input: {
     flex: 1,
     backgroundColor: "white",
-    fontSize: 32,
+    fontSize: 20,
   },
   list: {
     flex: 0.9,
