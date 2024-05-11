@@ -3,7 +3,7 @@
 # dependencies
 node_modules/
 
-# Secrets to hide
+# Secrets to hide from git
 .env
 
 # Expo

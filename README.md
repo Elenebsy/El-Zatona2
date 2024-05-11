@@ -1,23 +1,3 @@
-# Al-Zatona2
+#EL_Zatona Supermarket App
 
-
-welcome -> 3zat             x
-Signin -> 3zat               x
-Signup -> 3zat               x
-Forgot your password -> 3zat x
-
-NavBar -> for all page only
-Settings -> 3mr
-Search -> el3nbsy
-
-Profile -> kamal
-review -> 3zat
-Help/Support -> 3zat
-
-Home   -> mostafa
-
-products -> el3nbsy
-carts -> el3nbsy
-Notifications -> mostafa
-Announcements ->mostafa
-admin -> kamal
+Welcome to EL_Zatona, your one-stop solution for all your supermarket needs! This app aims to provide a convenient and seamless shopping experience for users, allowing them to browse, purchase, and manage their grocery needs from the comfort of their own device.
